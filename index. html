@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Anura Cabs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f2f2f2;
+        }
+
+        header {
+            background: #111;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .box {
+            background: white;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: green;
+            color: white;
+            border: none;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Anura Cabs</h1>
+    <p>Reliable Taxi Service Sri Lanka</p>
+</header>
+
+<div class="box">
+
+<h2>Book Your Taxi</h2>
+
+<label>Pickup Location</label>
+<input type="text" placeholder="Enter pickup location">
+
+<label>Destination</label>
+<input type="text" placeholder="Enter destination">
+
+<label>Distance (KM)</label>
+<input type="number" placeholder="Enter distance">
+
+<label>Estimated Fare</label>
+<input type="text" placeholder="Fare will appear here">
+
+<button>
+Book Taxi via WhatsApp
+</button>
+
+</div>
+
+</body>
+</html>
