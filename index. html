@@ -33,7 +33,22 @@
         <li>Tour Packages</li>
     </ul>
 </section>
+<section class="section">
+<h2>Book Your Taxi</h2>
 
+<label>Pickup Location</label><br>
+<input type="text" id="pickup"><br><br>
+
+<label>Destination</label><br>
+<input type="text" id="destination"><br><br>
+
+<label>Distance (KM)</label><br>
+<input type="number" id="distance"><br><br>
+
+<button class="btn" onclick="calculateFare()">Calculate Fare</button>
+
+<h3 id="fare"></h3>
+</section>
 <footer>
     <p>© 2026 Anura Cabs | Sri Lanka</p>
 </footer>
