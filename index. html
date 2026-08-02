@@ -1,74 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Anura Cabs</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f2f2f2;
-        }
-
-        header {
-            background: #111;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .box {
-            background: white;
-            margin: 20px;
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        input, button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            background: green;
-            color: white;
-            border: none;
-            font-size: 16px;
-        }
-    </style>
+    <title>Anura Cabs</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
-    <h1>Anura Cabs</h1>
-    <p>Reliable Taxi Service Sri Lanka</p>
+    <h1>🚖 Anura Cabs</h1>
+    <p>Safe & Reliable Taxi Service in Sri Lanka</p>
 </header>
 
-<div class="box">
+<section class="hero">
+    <h2>Book Your Taxi Today</h2>
+    <p>Airport Transfers • City Tours • Long Distance Travel</p>
 
-<h2>Book Your Taxi</h2>
+    <a class="btn" href="https://wa.me/94761609536">
+        Book on WhatsApp
+    </a>
+</section>
 
-<label>Pickup Location</label>
-<input type="text" placeholder="Enter pickup location">
+<section class="section">
+    <h2>Our Services</h2>
 
-<label>Destination</label>
-<input type="text" placeholder="Enter destination">
+    <ul>
+        <li>Airport Pickups</li>
+        <li>City Taxi</li>
+        <li>Long Distance Trips</li>
+        <li>Tour Packages</li>
+    </ul>
+</section>
 
-<label>Distance (KM)</label>
-<input type="number" placeholder="Enter distance">
+<footer>
+    <p>© 2026 Anura Cabs | Sri Lanka</p>
+</footer>
 
-<label>Estimated Fare</label>
-<input type="text" placeholder="Fare will appear here">
-
-<button>
-Book Taxi via WhatsApp
-</button>
-
-</div>
+<script src="script.js"></script>
 
 </body>
 </html>
