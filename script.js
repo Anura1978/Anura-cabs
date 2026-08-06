@@ -10,4 +10,26 @@ function calculateFare() {
     let fare = distance * 120;
 
     document.getElementById("fare").innerHTML =
-        "Estimated Fare: LKR " + fare;
+        "Estimated Fare: LKR " + fare;function bookTaxi() {
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let email = document.getElementById("email").value;
+  let vehicle = document.getElementById("vehicle").value;
+  let date = document.getElementById("date").value;
+  let time = document.getElementById("time").value;
+
+  let message =
+`🚖 Anura Cabs Booking
+
+Name: ${name}
+Phone: ${phone}
+Email: ${email}
+Vehicle: ${vehicle}
+Date: ${date}
+Time: ${time}`;
+
+  window.open(
+    "https://wa.me/94761609536?text=" + encodeURIComponent(message),
+    "_blank"
+  );
+}

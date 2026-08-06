@@ -34,8 +34,28 @@
     </ul>
 </section>
 <section class="section">
+
 <h2>Book Your Taxi</h2>
 
+<input type="text" id="name" placeholder="Full Name" required><br><br>
+
+<input type="tel" id="phone" placeholder="Phone Number" required><br><br>
+
+<input type="email" id="email" placeholder="Email Address"><br><br>
+
+<select id="vehicle" required>
+  <option value="">Select Vehicle</option>
+  <option>Car</option>
+  <option>Mini Van</option>
+  <option>Van</option>
+  <option>SUV</option>
+</select><br><br>
+
+<input type="date" id="date" required><br><br>
+
+<input type="time" id="time" required><br><br>
+
+<button class="btn" onclick="bookTaxi()">Book on WhatsApp</button>
 <label>Pickup Location</label><br>
 <input type="text" id="pickup"><br><br>
 
