@@ -28,8 +28,5 @@ Vehicle: ${vehicle}
 Date: ${date}
 Time: ${time}`;
 
-  window.open(
-    "https://wa.me/94761609536?text=" + encodeURIComponent(message),
-    "_blank"
   );
 }
