@@ -38,4 +38,3 @@ Estimated Fare: LKR ${fare}`;
     "https://wa.me/94761609536?text=" + encodeURIComponent(message),
     "_blank"
   );
-}
