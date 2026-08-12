@@ -34,7 +34,6 @@ Destination: ${destination}
 Distance: ${distance} KM
 Estimated Fare: LKR ${fare}`;
 
-  window.open(
-    "https://wa.me/94761609536?text=" + encodeURIComponent(message),
-    "_blank"
-  );
+let whatsappURL = "https://wa.me/94761609536?text=" + encodeURIComponent(message);
+
+window.location.href = whatsappURL;
