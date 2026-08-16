@@ -7,7 +7,7 @@ function calculateFare() {
     return;
   }
 
-  let fare = distance * 120;
+  let fare = Number(distance) * 120;
 
   document.getElementById("fare").innerHTML =
     "Estimated Fare: LKR " + fare;
@@ -19,8 +19,9 @@ function calculateFare() {
   let date = document.getElementById("date").value;
   let time = document.getElementById("time").value;
   let pickup = document.getElementById("pickup").value;
-  let destination = document.getElementById("destination").value:
-let message =
+  let destination = document.getElementById("destination").value;
+
+  let message =
 `🚖 Anura Cabs Booking
 
 Name: ${name}
@@ -31,14 +32,11 @@ Date: ${date}
 Time: ${time}
 Pickup: ${pickup}
 Destination: ${destination}
-let whatsappURL =
-  "https://wa.me/94761609536?text=" + encodeURIComponent(message);
-
-window.open(whatsappURL, "_blank");
 Distance: ${distance} KM
 Estimated Fare: LKR ${fare}`;
 
-let whatsappURL = "https://wa.me/94761609536?text=" + encodeURIComponent(message);
+  let whatsappURL =
+    "https://wa.me/94761609536?text=" + encodeURIComponent(message);
 
-window.location.href = whatsappURL;
+  window.location.href = whatsappURL;
 }
