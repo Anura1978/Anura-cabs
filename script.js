@@ -19,7 +19,7 @@ function calculateFare() {
   let date = document.getElementById("date").value;
   let time = document.getElementById("time").value;
   let pickup = document.getElementById("pickup").value;
-  let destination = document.getElementById("destination").value;
+  let destination = document.getElementById("destination").value:
 let message =
 `🚖 Anura Cabs Booking
 
