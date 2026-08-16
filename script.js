@@ -31,6 +31,10 @@ Date: ${date}
 Time: ${time}
 Pickup: ${pickup}
 Destination: ${destination}
+let whatsappURL =
+  "https://wa.me/94761609536?text=" + encodeURIComponent(message);
+
+window.open(whatsappURL, "_blank");
 Distance: ${distance} KM
 Estimated Fare: LKR ${fare}`;
 
