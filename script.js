@@ -37,3 +37,4 @@ Estimated Fare: LKR ${fare}`;
 let whatsappURL = "https://wa.me/94761609536?text=" + encodeURIComponent(message);
 
 window.location.href = whatsappURL;
+}
