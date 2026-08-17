@@ -40,3 +40,6 @@ Estimated Fare: LKR ${fare}`;
 
   window.location.href = whatsappURL;
 }
+function bookTaxi() {
+  calculateFare();
+}
