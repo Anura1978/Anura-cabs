@@ -164,3 +164,75 @@ footer {
     font-size: 18px;
     margin: 15px 0;
 }
+/* Anura Cabs - Improved Design */
+
+body {
+    background: #f5f7fa;
+}
+
+header {
+    padding: 25px 15px;
+}
+
+header h1 {
+    font-size: 34px;
+}
+
+.hero {
+    padding: 60px 20px;
+}
+
+.hero h2 {
+    font-size: 32px;
+}
+
+.btn {
+    background: #198754;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.03);
+}
+
+.ction,
+.booking,
+.contact {
+    max-width: 900px;
+    margin: 25px auto;
+    box-sizing: border-box;
+}
+
+.service {
+    border: 1px solid #e0e0e0;
+    transition: 0.3s;
+}
+
+.service:hover {
+    transform: translateY(-4px);
+}
+
+.booking input:focus,
+.booking select:focus {
+    outline: none;
+    border-color: #ffc107;
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.4);
+}
+
+.contact {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.contact .btn {
+    color: white;
+    display: inline-block;
+}
+
+footer {
+    margin-top: 30px;
+}
