@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anura Cabs</title> 
+
     <title>Anura Cabs</title>
 
-<meta name="description" content="Anura Cabs - Safe and reliable taxi service in Sri Lanka. Airport transfers, city tours and long distance travel.">
+    <meta name="description" content="Anura Cabs - Safe and reliable taxi service in Sri Lanka. Airport transfers, city tours and long distance travel.">
 
-<meta name="keywords" content="Anura Cabs, Sri Lanka taxi, taxi service Sri Lanka, airport transfer, taxi booking">
+    <meta name="keywords" content="Anura Cabs, Sri Lanka taxi, taxi service Sri Lanka, airport transfer, taxi booking">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -23,83 +25,57 @@
     <h2>Book Your Taxi Today</h2>
     <p>Airport Transfers • City Tours • Long Distance Travel</p>
 
-<button class="btn" onclick="bookTaxi()">Book Your Taxi</button>
+    <button class="btn" onclick="bookTaxi()">
+        Book Your Taxi
+    </button>
 </section>
 
 <section class="ction">
     <h2>Our Services</h2>
-<div class="services">
 
-    <div class="service">
-        <h3>✈️ Airport Transfers</h3>
-        <p>Safe and comfortable airport pickup and drop-off.</p>
-    </div>
+    <div class="services">
 
-    <div class="service">
-        <h3>🏙️ City Tours</h3>
-        <p>Explore Sri Lanka with a reliable private taxi.</p>
-    </div>
+        <div class="service">
+            <h3>✈️ Airport Transfers</h3>
+            <p>Safe and comfortable airport pickup and drop-off.</p>
+        </div>
 
-    <div class="service">
-        <h3>🛣️ Long Distance Travel</h3>
-        <p>Comfortable travel anywhere in Sri Lanka.</p>
+        <div class="service">
+            <h3>🏙️ City Tours</h3>
+            <p>Explore Sri Lanka with a reliable private taxi.</p>
+        </div>
+
+        <div class="service">
+            <h3>🛣️ Long Distance Travel</h3>
+            <p>Comfortable travel anywhere in Sri Lanka.</p>
+        </div>
+
     </div>
-    <ul>
-        <li>Airport Pickups</li>
-        <li>City Taxi</li>
-        <li>Long Distance Trips</li>
-        <li>Tour Packages</li>
-    </ul>
 </section>
-<section class="section">
 
-<h2>Book Your Taxi</h2>
-
-<input type="text" id="name" placeholder="Full Name" required><br><br>
-
-<input type="tel" id="phone" placeholder="Phone Number" required><br><br>
-
-<input type="email" id="email" placeholder="Email Address"><br><br>
-
-<select id="vehicle" required>
-  <option value="">Select Vehicle</option>
-  <option>Car</option>
-  <option>Mini Van</option>
-  <option>Van</option>
-  <option>SUV</option>
-</select><br><br>
-
-<input type="date" id="date" required><br><br>
-
-<input type="time" id="time" required><br><br>
-
-<button class="btn" onclick="calculateFare()">Book on WhatsApp</button>
-<label>Pickup Location</label><br>
-<input type="text" id="pickup"><br><br>
-
-<label>Destination</label><br>
-<input type="text" id="destination"><br><br>
-
-<label>Distance (KM)</label><br>
-    <p id="fare">Estimated Fare: LKR 0</p>
-<input type="number" id="distance"><br><br>
-
-<button class="btn" onclick="calculatefare()">Calculate Fare</button>
-
-<h3 id="fare"></h3>
-</section>
-<footer>
-    <p>© 2026 Anura Cabs | Sri Lanka</p>
-</footer>
-<script src="script.js"></script>
 <section class="booking">
+
     <h2>🚖 Book Your Taxi</h2>
 
-    <input type="text" id="name" placeholder="Full Name" required>
+    <input
+        type="text"
+        id="name"
+        placeholder="Full Name"
+        required
+    >
 
-    <input type="tel" id="phone" placeholder="Phone Number" required>
+    <input
+        type="tel"
+        id="phone"
+        placeholder="Phone Number"
+        required
+    >
 
-    <input type="email" id="email" placeholder="Email Address">
+    <input
+        type="email"
+        id="email"
+        placeholder="Email Address"
+    >
 
     <select id="vehicle" required>
         <option value="">Select Vehicle</option>
@@ -107,21 +83,84 @@
         <option value="Mini Van">Mini Van</option>
         <option value="Van">Van</option>
         <option value="SUV">SUV</option>
-    </select> 
-    <section class="contact">
+    </select>
+
+    <input
+        type="date"
+        id="date"
+        required
+    >
+
+    <input
+        type="time"
+        id="time"
+        required
+    >
+
+    <input
+        type="text"
+        id="pickup"
+        placeholder="Pickup Location"
+        required
+    >
+
+    <input
+        type="text"
+        id="destination"
+        placeholder="Destination"
+        required
+    >
+
+    <input
+        type="number"
+        id="distance"
+        placeholder="Distance (KM)"
+        required
+    >
+
+    <p id="fare">Estimated Fare: LKR 0</p>
+
+    <button class="btn" onclick="bookTaxi()">
+        💬 Book on WhatsApp
+    </button>
+
+</section>
+
+<section class="contact">
+
     <h2>📞 Contact Anura Cabs</h2>
 
     <p>📱 Phone: +94 76 160 9536</p>
-    <p>💬 WhatsApp: +94 76 160 9536</p>
-    <p>✈️ Airport Transfers • City Tours • Long Distance Travel</p>
 
-    <a class="btn" href="https://wa.me/94761609536" target="_blank">
+    <p>💬 WhatsApp: +94 76 160 9536</p>
+
+    <p>
+        ✈️ Airport Transfers • City Tours • Long Distance Travel
+    </p>
+
+    <a
+        class="btn"
+        href="https://wa.me/94761609536"
+        target="_blank"
+    >
         💬 Chat on WhatsApp
     </a>
-</section> 
-  <footer>
-    <p>© 2026 Anura Cabs. All Rights Reserved.</p>
-    <p>🚖 Safe & Reliable Taxi Service in Sri Lanka</p>
+
+</section>
+
+<footer>
+
+    <p>
+        © 2026 Anura Cabs. All Rights Reserved.
+    </p>
+
+    <p>
+        🚖 Safe & Reliable Taxi Service in Sri Lanka
+    </p>
+
 </footer>
+
+<script src="script.js"></script>
+
 </body>
 </html>
