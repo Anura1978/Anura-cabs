@@ -104,3 +104,63 @@ footer {
     padding: 18px;
   }
 }
+/* Services */
+.ction {
+    background: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.services {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.service {
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1;
+    min-width: 200px;
+}
+
+/* Booking Form */
+.booking {
+    background: white;
+    margin: 20px;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.booking h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.booking input,
+.booking select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    margin: 6px 0 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.booking .btn {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+#fare {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 15px 0;
+}
