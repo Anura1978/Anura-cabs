@@ -1,27 +1,42 @@
 function calculateFare() {
 
-  let distance = document.getElementById("distance").value;
+    let name = document.getElementById("name").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let vehicle = document.getElementById("vehicle").value;
+    let date = document.getElementById("date").value;
+    let time = document.getElementById("time").value;
+    let pickup = document.getElementById("pickup").value.trim();
+    let destination = document.getElementById("destination").value.trim();
+    let distance = document.getElementById("distance").value.trim();
 
-  if (distance === "") {
-    alert("Please enter distance");
-    return;
-  }
+    if (
+        name === "" ||
+        phone === "" ||
+        vehicle === "" ||
+        date === "" ||
+        time === "" ||
+        pickup === "" ||
+        destination === "" ||
+        distance === ""
+    ) {
+        alert("Please fill in all required booking details.");
+        return;
+    }
 
-  let fare = Number(distance) * 120;
+    let distanceNumber = Number(distance);
 
-  document.getElementById("fare").innerHTML =
-    "Estimated Fare: LKR " + fare;
+    if (distanceNumber <= 0 || isNaN(distanceNumber)) {
+        alert("Please enter a valid distance in KM.");
+        return;
+    }
 
-  let name = document.getElementById("name").value;
-  let phone = document.getElementById("phone").value;
-  let email = document.getElementById("email").value;
-  let vehicle = document.getElementById("vehicle").value;
-  let date = document.getElementById("date").value;
-  let time = document.getElementById("time").value;
-  let pickup = document.getElementById("pickup").value;
-  let destination = document.getElementById("destination").value;
+    let fare = distanceNumber * 120;
 
-  let message =
+    document.getElementById("fare").innerHTML =
+        "Estimated Fare: LKR " + fare.toLocaleString();
+
+    let message =
 `🚖 Anura Cabs Booking
 
 Name: ${name}
@@ -32,14 +47,17 @@ Date: ${date}
 Time: ${time}
 Pickup: ${pickup}
 Destination: ${destination}
-Distance: ${distance} KM
-Estimated Fare: LKR ${fare}`;
+Distance: ${distanceNumber} KM
+Estimated Fare: LKR ${fare.toLocaleString()}`;
 
-  let whatsappURL =
-    "https://wa.me/94761609536?text=" + encodeURIComponent(message);
+    let whatsappURL =
+        "https://wa.me/94761609536?text=" +
+        encodeURIComponent(message);
 
-  window.location.href = whatsappURL;
+    window.location.href = whatsappURL;
 }
+
+
 function bookTaxi() {
-  calculateFare();
+    calculateFare();
 }
