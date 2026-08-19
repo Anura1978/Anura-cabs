@@ -1,4 +1,4 @@
-} 
+
 function updateFare() {
     let vehicle = document.getElementById("vehicle").value;
     let distance = Number(document.getElementById("distance").value);
@@ -30,7 +30,9 @@ function updateFare() {
 
     document.getElementById("fare").innerHTML =
         "Estimated Fare: LKR " + fare.toLocaleString();
-} function calculateFare() {
+}
+
+function calculateFare() {
 
     let name = document.getElementById("name").value.trim();
     let phone = document.getElementById("phone").value.trim();
@@ -101,7 +103,7 @@ Estimated Fare: LKR ${fare.toLocaleString()}`;
         "https://wa.me/94761609536?text=" +
         encodeURIComponent(message);
 
-    window.location.href = whatsappURL;
+window.location.href = whatsappURL;
 }
 
 
