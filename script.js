@@ -1,4 +1,36 @@
-function calculateFare() {
+} 
+function updateFare() {
+    let vehicle = document.getElementById("vehicle").value;
+    let distance = Number(document.getElementById("distance").value);
+
+    if (!vehicle || !distance || distance <= 0) {
+        document.getElementById("fare").innerHTML =
+            "Estimated Fare: LKR 0";
+        return;
+    }
+
+    let fare;
+
+    if (vehicle === "Car") {
+        fare = distance * 120;
+
+    } else if (vehicle === "Mini Van") {
+        fare = distance * 150;
+
+    } else if (vehicle === "Van") {
+        if (distance <= 10) {
+            fare = 3000;
+        } else {
+            fare = 3000 + ((distance - 10) * 180);
+        }
+
+    } else if (vehicle === "SUV") {
+        fare = distance * 200;
+    }
+
+    document.getElementById("fare").innerHTML =
+        "Estimated Fare: LKR " + fare.toLocaleString();
+} function calculateFare() {
 
     let name = document.getElementById("name").value.trim();
     let phone = document.getElementById("phone").value.trim();
