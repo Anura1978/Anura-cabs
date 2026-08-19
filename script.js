@@ -31,10 +31,25 @@ function calculateFare() {
         return;
     }
 
-    let fare = distanceNumber * 120;
+    let fare;
 
-    document.getElementById("fare").innerHTML =
-        "Estimated Fare: LKR " + fare.toLocaleString();
+if (vehicle === "Car") {
+    fare = distanceNumber * 120;
+
+} else if (vehicle === "Mini Van") {
+    fare = distanceNumber * 150;
+
+} else if (vehicle === "Van") {
+
+    if (distanceNumber <= 10) {
+        fare = 3000;
+    } else {
+        fare = 3000 + ((distanceNumber - 10) * 180);
+    }
+
+} else if (vehicle === "SUV") {
+    fare = distanceNumber * 200;
+}
 
     let message =
 `🚖 Anura Cabs Booking
