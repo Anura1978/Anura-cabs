@@ -101,7 +101,7 @@
         placeholder="Email Address"
     >
 
-    <select id="vehicle" required>
+    <select id="vehicle" required onchange="updateFare()">
         <option value="">Select Vehicle</option>
         <option value="Car">Car</option>
         <option value="Mini Van">Mini Van</option>
@@ -136,10 +136,12 @@
     >
 
     <input
-        type="number"
-        id="distance"
-        placeholder="Distance (KM)"
-        required
+    type="number"
+    id="distance"
+    placeholder="Distance (KM)"
+    required
+    oninput="updateFare()"
+>
     >
 
     <p id="fare">Estimated Fare: LKR 0</p>
