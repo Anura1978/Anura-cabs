@@ -111,8 +111,6 @@ function bookTaxi() {
     calculateFare();
 }
 
-    
-}
 async function getCoordinates(location) {
     const url =
         "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" +
