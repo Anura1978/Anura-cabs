@@ -110,3 +110,12 @@ window.location.href = whatsappURL;
 function bookTaxi() {
     calculateFare();
 }
+function initMap() {
+    const map = new google.maps.Map(document.getElementById("map"), {
+        center: {
+            lat: 7.1808,
+            lng: 79.8841
+        },
+        zoom: 12
+    });
+}
