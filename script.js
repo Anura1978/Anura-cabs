@@ -111,11 +111,62 @@ function bookTaxi() {
     calculateFare();
 }
 function initMap() {
+
     const map = new google.maps.Map(document.getElementById("map"), {
         center: {
             lat: 7.1808,
             lng: 79.8841
         },
-        zoom: 12
+        zoom: 10
     });
+
+    const pickupInput = document.getElementById("pickup");
+    const destinationInput = document.getElementById("destination");
+
+    const pickupAutocomplete = new google.maps.places.Autocomplete(pickupInput);
+    const destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput);
+
+    const directionsService = new google.maps.DirectionsService();
+    const directionsRenderer = new google.maps.DirectionsRenderer();
+
+    directionsRenderer.setMap(map);
+
+    function calculateDistance() {
+
+        const pickup = pickupInput.value.trim();
+        const destination = destinationInput.value.trim();
+
+        if (pickup === "" || destination === "") {
+            return;
+        }
+
+        directionsService.route(
+            {
+                origin: pickup,
+                destination: destination,
+                travelMode: google.maps.TravelMode.DRIVING
+            },
+            function(result, status) {
+
+                if (status === "OK") {
+
+                    directionsRenderer.setDirections(result);
+
+                    const distanceMeters =
+                        result.routes[0].legs[0].distance.value;
+
+                    const distanceKM =
+                        (distanceMeters / 1000).toFixed(1);
+
+                    document.getElementById("distance").value =
+                        distanceKM;
+
+                    updateFare();
+                }
+            }
+        );
+    }
+
+    pickupAutocomplete.addListener("place_changed", calculateDistance);
+    destinationAutocomplete.addListener("place_changed", calculateDistance);
 }
