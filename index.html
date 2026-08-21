@@ -128,21 +128,25 @@
         required            
         onchange="calculateRouteDistance()"
     >
+<input
+    type="text"
+    id="destination"
+    placeholder="Destination"
+    required
+>
 
-    <input
-        type="text"
-        id="destination"
-        placeholder="Destination"
-        required 
-        onchange="calculateRouteDistance()"
-    >
+<button type="button" class="btn" onclick="calculateRouteDistance()">
+    📍 Calculate Distance
+</button>
 
-    <input
+<input
     type="number"
     id="distance"
     placeholder="Distance (KM)"
     required
     oninput="updateFare()"
+>
+
 >
 
     <p id="fare">Estimated Fare: LKR 0</p>
