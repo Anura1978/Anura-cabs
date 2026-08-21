@@ -1,248 +1,214 @@
-7974body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-    color: #333;
+* {
+    box-sizing: border-box;
 }
 
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    color: #222;
+}
+
+/* Header */
 header {
     background: #111;
     color: white;
     text-align: center;
-    padding: 20px;
+    padding: 28px 15px;
 }
 
 header h1 {
     margin: 0;
-    font-size: 32px;
+    font-size: 34px;
+    font-weight: bold;
 }
 
+header p {
+    margin: 10px auto 0;
+    max-width: 800px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Hero */
 .hero {
     background: #ffc107;
     text-align: center;
-    padding: 50px 20px;
+    padding: 65px 20px;
 }
 
 .hero h2 {
-    margin-bottom: 10px;
-    font-size: 30px;
+    margin: 0 0 10px;
+    font-size: 34px;
 }
 
 .hero p {
     font-size: 18px;
+    margin-bottom: 25px;
 }
 
+/* Buttons */
 .btn {
     display: inline-block;
-    background: green;
+    background: #198754;
     color: white;
     text-decoration: none;
-    padding: 12px 25px;
-    border-radius: 5px;
-    margin-top: 20px;
-    font-size: 18px;
-}
-
-.section {
-    background: white;
-    margin: 20px;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-footer {
-    background: #111;
-    color: white;
-    text-align: center;
-    padding: 15px;
-}
-/* Booking Form */
-.section input,
-.section select {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 12px;
-  margin: 6px 0 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 16px;
-}
-
-.section label {
-  font-weight: bold;
-}
-
-.section h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.btn {
-  border: none;
-  cursor: pointer;
+    border: none;
+    padding: 14px 26px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .btn:hover {
-  opacity: 0.85;
+    background: #146c43;
+    transform: translateY(-2px);
 }
 
-@media (max-width: 600px) {
-  header h1 {
-    font-size: 28px;
-  }
-
-  .hero {
-    padding: 40px 15px;
-  }
-
-  .hero h2 {
-    font-size: 26px;
-  }
-
-  .section {
-    margin: 15px 10px;
-    padding: 18px;
-  }
-}
-/* Services */
-.ction {
+/* Sections */
+.ction,
+.why-us,
+.booking,
+.contact {
+    max-width: 900px;
+    margin: 25px auto;
+    padding: 28px;
     background: white;
-    margin: 20px;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
+    border-radius: 14px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
 }
 
+.ction h2,
+.why-us h2,
+.booking h2,
+.contact h2 {
+    text-align: center;
+    margin-top: 0;
+}
+
+/* Services */
 .services {
     display: flex;
-    gap: 15px;
+    gap: 18px;
     justify-content: center;
     flex-wrap: wrap;
 }
 
 .service {
-    background: #f4f4f4;
-    padding: 20px;
-    border-radius: 10px;
+    background: #f8f9fa;
+    border: 1px solid #e5e5e5;
+    padding: 22px;
+    border-radius: 12px;
     flex: 1;
-    min-width: 200px;
-}
-
-/* Booking Form */
-.booking {
-    background: white;
-    margin: 20px;
-    padding: 25px;
-    border-radius: 10px;
-}
-
-.booking h2 {
+    min-width: 210px;
     text-align: center;
-    margin-bottom: 20px;
-}
-
-.booking input,
-.booking select {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 12px;
-    margin: 6px 0 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-.booking .btn {
-    width: 100%;
-    border: none;
-    cursor: pointer;
-}
-
-#fare {
-    text-align: center;
-    font-weight: bold;
-    font-size: 18px;
-    margin: 15px 0;
-}
-/* Anura Cabs - Improved Design */
-
-body {
-    background: #f5f7fa;
-}
-
-header {
-    padding: 25px 15px;
-}
-
-header h1 {
-    font-size: 34px;
-}
-
-.hero {
-    padding: 60px 20px;
-}
-
-.hero h2 {
-    font-size: 32px;
-}
-
-.btn {
-    background: #198754;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    transform: scale(1.03);
-}
-
-.ction,
-.booking,
-.contact {
-    max-width: 900px;
-    margin: 25px auto;
-    box-sizing: border-box;
-}
-
-.service {
-    border: 1px solid #e0e0e0;
     transition: 0.3s;
 }
 
 .service:hover {
     transform: translateY(-4px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.service h3 {
+    margin-top: 0;
+}
+
+/* Booking */
+.booking input,
+.booking select {
+    width: 100%;
+    padding: 14px;
+    margin: 7px 0 13px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background: white;
 }
 
 .booking input:focus,
 .booking select:focus {
     outline: none;
     border-color: #ffc107;
-    box-shadow: 0 0 5px rgba(255, 193, 7, 0.4);
+    box-shadow: 0 0 6px rgba(255, 193, 7, 0.35);
 }
 
-.contact {
-    background: white;
-    padding: 25px;
+/* Distance Button */
+.booking button.btn {
+    width: 100%;
+}
+
+/* Fare */
+#fare {
+    text-align: center;
+    font-size: 21px;
+    font-weight: bold;
+    background: #fff3cd;
+    padding: 15px;
     border-radius: 10px;
+    margin: 18px 0;
+}
+
+/* Contact */
+.contact {
     text-align: center;
 }
 
-.contact .btn {
-    color: white;
-    display: inline-block;
+.contact p {
+    font-size: 17px;
+    line-height: 1.6;
 }
 
+/* Footer */
 footer {
-    margin-top: 30px;
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 20px 15px;
+    margin-top: 35px;
 }
-/* Mobile Booking Improvements */
 
+/* Mobile */
 @media (max-width: 600px) {
 
-    .booking {
+    header {
+        padding: 22px 12px;
+    }
+
+    header h1 {
+        font-size: 27px;
+    }
+
+    header p {
+        font-size: 14px;
+    }
+
+    .hero {
+        padding: 48px 15px;
+    }
+
+    .hero h2 {
+        font-size: 27px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .ction,
+    .why-us,
+    .booking,
+    .contact {
         margin: 15px 10px;
         padding: 20px 15px;
+        border-radius: 12px;
+    }
+
+    .service {
+        min-width: 100%;
     }
 
     .booking input,
@@ -251,37 +217,13 @@ footer {
         font-size: 16px;
     }
 
-    .booking .btn {
+    .btn {
+        width: 100%;
         padding: 14px;
         font-size: 17px;
     }
 
     #fare {
-        padding: 12px;
-        border-radius: 8px;
-        background: #fff3cd;
-    }
-}
-/* Anura Cabs Sri Lanka Header */
-
-header h1 {
-    font-size: 34px;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-}
-
-header p {
-    margin-top: 10px;
-    font-size: 16px;
-    line-height: 1.5;
-}
-
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 27px;
-    }
-
-    header p {
-        font-size: 14px;
+        font-size: 19px;
     }
 }
