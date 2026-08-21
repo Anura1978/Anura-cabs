@@ -170,3 +170,57 @@ function initMap() {
     pickupAutocomplete.addListener("place_changed", calculateDistance);
     destinationAutocomplete.addListener("place_changed", calculateDistance);
 }
+async function getCoordinates(location) {
+    const url =
+        "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" +
+        encodeURIComponent(location + ", Sri Lanka");
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.length === 0) {
+        return null;
+    }
+
+    return {
+        lat: Number(data[0].lat),
+        lon: Number(data[0].lon)
+    };
+}async function calculateRouteDistance() {
+
+    const pickup = document.getElementById("pickup").value.trim();
+    const destination = document.getElementById("destination").value.trim();
+
+    if (pickup === "" || destination === "") {
+        return;
+    }
+
+    const pickupCoords = await getCoordinates(pickup);
+    const destinationCoords = await getCoordinates(destination);
+
+    if (!pickupCoords || !destinationCoords) {
+        alert("Location not found. Please enter a valid Sri Lankan location.");
+        return;
+    }
+
+    const routeURL =
+        "https://router.project-osrm.org/route/v1/driving/" +
+        pickupCoords.lon + "," + pickupCoords.lat + ";" +
+        destinationCoords.lon + "," + destinationCoords.lat +
+        "?overview=false";
+
+    const response = await fetch(routeURL);
+    const data = await response.json();
+
+    if (data.code !== "Ok" || !data.routes.length) {
+        alert("Route could not be found.");
+        return;
+    }
+
+    const distanceKM =
+        (data.routes[0].distance / 1000).toFixed(1);
+
+    document.getElementById("distance").value = distanceKM;
+
+    updateFare();
+}
