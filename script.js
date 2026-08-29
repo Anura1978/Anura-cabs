@@ -1,14 +1,14 @@
 function updateFare() {
-    let vehicle = document.getElementById("vehicle").value;
-    let distance = Number(document.getElementById("distance").value);
+    const vehicle = document.getElementById("vehicle").value;
+    const distance = Number(document.getElementById("distance").value);
+    const fareElement = document.getElementById("fare");
 
     if (!vehicle || !distance || distance <= 0) {
-        document.getElementById("fare").innerHTML =
-            "Estimated Fare: LKR 0";
+        fareElement.innerHTML = "Estimated Fare: LKR 0";
         return;
     }
 
-    let fare;
+    let fare = 0;
 
     if (vehicle === "Car") {
         fare = distance * 120;
@@ -27,22 +27,22 @@ function updateFare() {
         fare = distance * 200;
     }
 
-    document.getElementById("fare").innerHTML =
-        "Estimated Fare: LKR " + fare.toLocaleString();
+    fareElement.innerHTML =
+        "💰 Estimated Fare: LKR " + fare.toLocaleString();
 }
 
 
 function calculateFare() {
 
-    let name = document.getElementById("name").value.trim();
-    let phone = document.getElementById("phone").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let vehicle = document.getElementById("vehicle").value;
-    let date = document.getElementById("date").value;
-    let time = document.getElementById("time").value;
-    let pickup = document.getElementById("pickup").value.trim();
-    let destination = document.getElementById("destination").value.trim();
-    let distance = document.getElementById("distance").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const vehicle = document.getElementById("vehicle").value;
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+    const pickup = document.getElementById("pickup").value.trim();
+    const destination = document.getElementById("destination").value.trim();
+    const distance = document.getElementById("distance").value.trim();
 
     if (
         name === "" ||
@@ -58,14 +58,14 @@ function calculateFare() {
         return;
     }
 
-    let distanceNumber = Number(distance);
+    const distanceNumber = Number(distance);
 
-    if (distanceNumber <= 0 || isNaN(distanceNumber)) {
+    if (isNaN(distanceNumber) || distanceNumber <= 0) {
         alert("Please enter a valid distance in KM.");
         return;
     }
 
-    let fare;
+    let fare = 0;
 
     if (vehicle === "Car") {
         fare = distanceNumber * 120;
@@ -84,21 +84,36 @@ function calculateFare() {
         fare = distanceNumber * 200;
     }
 
-    let message =
-`🚖 Anura Cabs Booking
 
+    const message =
+`🚖 ANURA CABS – TAXI BOOKING
+
+👤 Customer Details
 Name: ${name}
 Phone: ${phone}
-Email: ${email}
+Email: ${email || "Not provided"}
+
+🚗 Journey Details
 Vehicle: ${vehicle}
 Date: ${date}
 Time: ${time}
-Pickup: ${pickup}
-Destination: ${destination}
-Distance: ${distanceNumber} KM
-Estimated Fare: LKR ${fare.toLocaleString()}`;
 
-    let whatsappURL =
+📍 Pickup:
+${pickup}
+
+📍 Destination:
+${destination}
+
+📏 Distance:
+${distanceNumber} KM
+
+💰 Estimated Fare:
+LKR ${fare.toLocaleString()}
+
+Thank you for choosing Anura Cabs 🇱🇰
+Safe & Reliable Taxi Service in Sri Lanka.`;
+
+    const whatsappURL =
         "https://wa.me/94761609536?text=" +
         encodeURIComponent(message);
 
@@ -111,6 +126,10 @@ function bookTaxi() {
 }
 
 
+/* =========================
+   LOCATION SEARCH
+========================= */
+
 async function getCoordinates(location) {
 
     const url =
@@ -118,6 +137,11 @@ async function getCoordinates(location) {
         encodeURIComponent(location + ", Sri Lanka");
 
     const response = await fetch(url);
+
+    if (!response.ok) {
+        throw new Error("Location service unavailable");
+    }
+
     const data = await response.json();
 
     if (data.length === 0) {
@@ -131,6 +155,10 @@ async function getCoordinates(location) {
 }
 
 
+/* =========================
+   CALCULATE ROUTE DISTANCE
+========================= */
+
 async function calculateRouteDistance() {
 
     const pickup =
@@ -140,23 +168,59 @@ async function calculateRouteDistance() {
         document.getElementById("destination").value.trim();
 
     if (pickup === "" || destination === "") {
+        alert("Please enter both Pickup Location and Destination.");
         return;
     }
 
+
+    const distanceInput =
+        document.getElementById("distance");
+
+    const fareElement =
+        document.getElementById("fare");
+
+    const distanceButton =
+        document.querySelector(".distance-btn");
+
+
     try {
+
+        distanceButton.disabled = true;
+        distanceButton.innerHTML = "⏳ Calculating Distance...";
+
+        distanceInput.value = "";
+        fareElement.innerHTML = "📍 Calculating route...";
+
 
         const pickupCoords =
             await getCoordinates(pickup);
 
+        if (!pickupCoords) {
+            alert(
+                "Pickup location could not be found. Please enter a valid Sri Lankan location."
+            );
+
+            fareElement.innerHTML =
+                "Estimated Fare: LKR 0";
+
+            return;
+        }
+
+
         const destinationCoords =
             await getCoordinates(destination);
 
-        if (!pickupCoords || !destinationCoords) {
+        if (!destinationCoords) {
             alert(
-                "Location not found. Please enter a valid Sri Lankan location."
+                "Destination could not be found. Please enter a valid Sri Lankan location."
             );
+
+            fareElement.innerHTML =
+                "Estimated Fare: LKR 0";
+
             return;
         }
+
 
         const routeURL =
             "https://router.project-osrm.org/route/v1/driving/" +
@@ -164,28 +228,63 @@ async function calculateRouteDistance() {
             destinationCoords.lon + "," + destinationCoords.lat +
             "?overview=false";
 
-        const response = await fetch(routeURL);
-        const data = await response.json();
 
-        if (data.code !== "Ok" || !data.routes.length) {
-            alert("Route could not be found.");
+        const response =
+            await fetch(routeURL);
+
+
+        if (!response.ok) {
+            throw new Error("Route service unavailable");
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            data.code !== "Ok" ||
+            !data.routes ||
+            data.routes.length === 0
+        ) {
+            alert(
+                "A driving route could not be found between these locations."
+            );
+
+            fareElement.innerHTML =
+                "Estimated Fare: LKR 0";
+
             return;
         }
+
 
         const distanceKM =
             (data.routes[0].distance / 1000).toFixed(1);
 
-        document.getElementById("distance").value =
+
+        distanceInput.value =
             distanceKM;
 
+
         updateFare();
+
 
     } catch (error) {
 
         console.error(error);
 
         alert(
-            "Unable to calculate distance. Please try again."
+            "Unable to calculate the distance right now. Please try again."
         );
+
+        fareElement.innerHTML =
+            "Estimated Fare: LKR 0";
+
+    } finally {
+
+        distanceButton.disabled = false;
+
+        distanceButton.innerHTML =
+            "📍 Calculate Distance";
     }
 }
