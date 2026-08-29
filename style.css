@@ -1,130 +1,130 @@
 * {
-  box-sizing: border-box;
-  }
+    box-sizing: border-box;
+}
 
 html {
-scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-margin: 0;
-font-family: Arial, Helvetica, sans-serif;
-background: #f5f7fa;
-color: #222;
-line-height: 1.6;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fa;
+    color: #222;
+    line-height: 1.6;
 }
 
 /* =========================
-HEADER
+   HEADER
 ========================= */
 
 header {
-background: #111;
-color: #fff;
-text-align: center;
-padding: 25px 15px;
+    background: #111;
+    color: #fff;
+    text-align: center;
+    padding: 25px 15px;
 }
 
 .header-content {
-max-width: 1000px;
-margin: auto;
+    max-width: 1000px;
+    margin: auto;
 }
 
 header h1 {
-margin: 0;
-font-size: 34px;
-font-weight: 700;
+    margin: 0;
+    font-size: 34px;
+    font-weight: 700;
 }
 
 header p {
-margin: 8px auto 0;
-font-size: 17px;
+    margin: 8px auto 0;
+    font-size: 17px;
 }
 
 header .header-subtitle {
-font-size: 14px;
-opacity: 0.85;
+    font-size: 14px;
+    opacity: 0.85;
 }
 
 /* =========================
-HERO
+   HERO
 ========================= */
 
 .hero {
-background: #ffc107;
-text-align: center;
-padding: 75px 20px;
+    background: #ffc107;
+    text-align: center;
+    padding: 75px 20px;
 }
 
 .hero-content {
-max-width: 850px;
-margin: auto;
+    max-width: 850px;
+    margin: auto;
 }
 
 .hero-label {
-font-size: 14px;
-font-weight: bold;
-letter-spacing: 1px;
-margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
 }
 
 .hero h2 {
-margin: 0;
-font-size: 46px;
-line-height: 1.15;
+    margin: 0;
+    font-size: 46px;
+    line-height: 1.15;
 }
 
 .hero h2 span {
-display: inline-block;
+    display: inline-block;
 }
 
 .hero-text {
-max-width: 700px;
-margin: 20px auto;
-font-size: 18px;
+    max-width: 700px;
+    margin: 20px auto;
+    font-size: 18px;
 }
 
 .hero-buttons {
-display: flex;
-justify-content: center;
-gap: 12px;
-flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 /* =========================
-BUTTONS
+   BUTTONS
 ========================= */
 
 .btn {
-display: inline-block;
-background: #198754;
-color: #fff;
-text-decoration: none;
-border: none;
-padding: 14px 26px;
-border-radius: 8px;
-margin-top: 12px;
-font-size: 17px;
-font-weight: 700;
-cursor: pointer;
-transition: 0.3s ease;
+    display: inline-block;
+    background: #198754;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    padding: 14px 26px;
+    border-radius: 8px;
+    margin-top: 12px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
 }
 
 .btn:hover {
-background: #146c43;
-transform: translateY(-2px);
+    background: #146c43;
+    transform: translateY(-2px);
 }
 
 .whatsapp-btn {
-background: #198754;
+    background: #198754;
 }
 
 .whatsapp-btn:hover {
-background: #146c43;
+    background: #146c43;
 }
 
 /* =========================
-SECTIONS
+   SECTIONS
 ========================= */
 
 .services-section,
@@ -132,406 +132,289 @@ SECTIONS
 .booking,
 .destinations,
 .contact {
-max-width: 1000px;
-margin: 28px auto;
-padding: 35px 28px;
-background: #fff;
-border-radius: 16px;
-box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+    max-width: 1000px;
+    margin: 28px auto;
+    padding: 35px 28px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
 }
 
 .section-heading {
-text-align: center;
-margin-bottom: 28px;
+    text-align: center;
+    margin-bottom: 28px;
 }
 
 .section-heading h2 {
-margin: 5px 0 10px;
-font-size: 30px;
+    margin: 5px 0 10px;
+    font-size: 30px;
 }
 
 .section-heading p {
-margin: 0 auto;
-max-width: 700px;
+    margin: 0 auto;
+    max-width: 700px;
 }
 
 .section-label {
-color: #198754;
-font-size: 13px;
-font-weight: 700;
-letter-spacing: 1.5px;
+    color: #198754;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
 }
 
 /* =========================
-SERVICES
+   SERVICES
 ========================= */
 
 .services {
-display: flex;
-gap: 20px;
-justify-content: center;
-flex-wrap: wrap;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .service {
-background: #f8f9fa;
-border: 1px solid #e5e5e5;
-padding: 25px 20px;
-border-radius: 14px;
-flex: 1;
-min-width: 220px;
-text-align: center;
-transition: 0.3s ease;
+    background: #f8f9fa;
+    border: 1px solid #e5e5e5;
+    padding: 25px 20px;
+    border-radius: 14px;
+    flex: 1;
+    min-width: 220px;
+    text-align: center;
+    transition: 0.3s ease;
 }
 
 .service:hover {
-transform: translateY(-5px);
-box-shadow: 0 7px 20px rgba(0, 0, 0, 0.09);
+    transform: translateY(-5px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.09);
 }
 
 .service-icon {
-font-size: 38px;
-margin-bottom: 8px;
+    font-size: 38px;
+    margin-bottom: 8px;
 }
 
 .service h3 {
-margin: 8px 0;
-font-size: 20px;
+    margin: 8px 0;
+    font-size: 20px;
 }
 
 .service p {
-margin: 0;
-color: #555;
+    margin: 0;
+    color: #555;
 }
 
 /* =========================
-BOOKING
+   BOOKING
 ========================= */
 
 .booking {
-border-top: 5px solid #ffc107;
+    border-top: 5px solid #ffc107;
 }
 
 .booking-form {
-max-width: 650px;
-margin: auto;
+    max-width: 650px;
+    margin: auto;
 }
 
 .booking-form label {
-display: block;
-margin-top: 10px;
-margin-bottom: 5px;
-font-weight: 700;
-font-size: 15px;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 15px;
 }
 
 .booking input,
 .booking select {
-width: 100%;
-padding: 14px;
-margin: 0 0 10px;
-border: 1px solid #ccc;
-border-radius: 8px;
-font-size: 16px;
-background: #fff;
+    width: 100%;
+    padding: 14px;
+    margin: 0 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background: #fff;
 }
 
 .booking input:focus,
 .booking select:focus {
-outline: none;
-border-color: #ffc107;
-box-shadow: 0 0 6px rgba(255, 193, 7, 0.35);
+    outline: none;
+    border-color: #ffc107;
+    box-shadow: 0 0 6px rgba(255, 193, 7, 0.35);
 }
 
 .distance-btn,
 .booking-btn {
-width: 100%;
+    width: 100%;
 }
 
 #fare {
-text-align: center;
-font-size: 22px;
-font-weight: 700;
-background: #fff3cd;
-padding: 17px;
-border-radius: 10px;
-margin: 18px 0;
-border: 1px solid #ffe69c;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    background: #fff3cd;
+    padding: 17px;
+    border-radius: 10px;
+    margin: 18px 0;
+    border: 1px solid #ffe69c;
 }
 
 /* =========================
-DESTINATIONS
+   DESTINATIONS
 ========================= */
 
 .destination-list {
-display: flex;
-justify-content: center;
-gap: 12px;
-flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 .destination-list span {
-background: #f8f9fa;
-border: 1px solid #e5e5e5;
-padding: 10px 15px;
-border-radius: 25px;
-font-weight: 600;
+    background: #f8f9fa;
+    border: 1px solid #e5e5e5;
+    padding: 10px 15px;
+    border-radius: 25px;
+    font-weight: 600;
 }
 
 /* =========================
-CONTACT
+   CONTACT
 ========================= */
 
 .contact {
-text-align: center;
-}
-
-.contact p {
-font-size: 17px;
-margin: 8px 0;
-}
-
-/* =========================
-FOOTER
-========================= */
-
-footer {
-background: #111;
-color: #fff;
-text-align: center;
-padding: 25px 15px;
-margin-top: 40px;
-}
-
-footer p {
-margin: 6px 0;
-}
-
-/* =========================
-MOBILE
-========================= */
-
-@media (max-width: 700px) {
-
-header {
-    padding: 22px 12px;
-}
-
-header h1 {
-    font-size: 27px;
-}
-
-header p {
-    font-size: 15px;
-}
-
-.hero {
-    padding: 55px 15px;
-}
-
-.hero h2 {
-    font-size: 34px;
-}
-
-.hero-text {
-    font-size: 16px;
-}
-
-.hero-buttons {
-    display: block;
-}
-
-.hero-buttons .btn {
-    width: 100%;
-    margin-top: 10px;
-}
-
-.services-section,
-.why-us,
-.booking,
-.destinations,
-.contact {
-    margin: 16px 10px;
-    padding: 25px 16px;
-    border-radius: 13px;
-}
-
-.section-heading h2 {
-    font-size: 25px;
-}
-
-.service {
-    min-width: 100%;
-}
-
-.booking input,
-.booking select {
-    padding: 14px;
-    font-size: 16px;
-}
-
-.btn {
-    width: 100%;
-    padding: 14px;
-    font-size: 17px;
-}
-
-#fare {
-    font-size: 19px;
-}
-
-.destination-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.destination-list span {
     text-align: center;
 }
 
+.contact p {
+    font-size: 17px;
+    margin: 8px 0;
+}
+
 /* =========================
-FLOATING CONTACT BUTTONS
+   FOOTER
+========================= */
+
+footer {
+    background: #111;
+    color: #fff;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 40px;
+}
+
+footer p {
+    margin: 6px 0;
+}
+
+/* =========================
+   FLOATING CONTACT BUTTONS
 ========================= */
 
 .floating-contact {
-position: fixed;
-right: 18px;
-bottom: 18px;
-display: flex;
-flex-direction: column;
-gap: 10px;
-z-index: 9999;
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999;
 }
 
 .floating-contact a {
-width: 54px;
-height: 54px;
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-text-decoration: none;
-font-size: 25px;
-box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
-transition: 0.3s ease;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 25px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+    transition: 0.3s ease;
 }
 
 .floating-contact a:hover {
-transform: scale(1.08);
+    transform: scale(1.08);
 }
 
 .floating-whatsapp {
-background: #198754;
-color: white;
+    background: #198754;
+    color: white;
 }
 
 .floating-call {
-background: #111;
-color: white;
+    background: #111;
+    color: white;
 }
 
 /* =========================
-AIRPORT TRANSFER
+   AIRPORT TRANSFER
 ========================= */
 
 .airport-transfer {
-max-width: 1000px;
-margin: 28px auto;
-padding: 40px 28px;
-background: #fff;
-border-radius: 16px;
-box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
-border-top: 5px solid #ffc107;
+    max-width: 1000px;
+    margin: 28px auto;
+    padding: 40px 28px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+    border-top: 5px solid #ffc107;
 }
 
 .airport-content {
-display: flex;
-gap: 20px;
-justify-content: center;
-flex-wrap: wrap;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .airport-card {
-flex: 1;
-min-width: 220px;
-padding: 25px 20px;
-text-align: center;
-background: #f8f9fa;
-border: 1px solid #e5e5e5;
-border-radius: 14px;
-transition: 0.3s ease;
+    flex: 1;
+    min-width: 220px;
+    padding: 25px 20px;
+    text-align: center;
+    background: #f8f9fa;
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+    transition: 0.3s ease;
 }
 
 .airport-card:hover {
-transform: translateY(-5px);
-box-shadow: 0 7px 20px rgba(0, 0, 0, 0.09);
+    transform: translateY(-5px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.09);
 }
 
 .airport-icon {
-font-size: 38px;
-margin-bottom: 8px;
+    font-size: 38px;
+    margin-bottom: 8px;
 }
 
 .airport-card h3 {
-margin: 8px 0;
-font-size: 20px;
+    margin: 8px 0;
+    font-size: 20px;
 }
 
 .airport-card p {
-margin: 0;
-color: #555;
+    margin: 0;
+    color: #555;
 }
 
 .airport-cta {
-margin-top: 30px;
-padding: 25px;
-text-align: center;
-background: #fff3cd;
-border-radius: 12px;
+    margin-top: 30px;
+    padding: 25px;
+    text-align: center;
+    background: #fff3cd;
+    border-radius: 12px;
 }
 
 .airport-cta h3 {
-margin: 0 0 5px;
-font-size: 24px;
+    margin: 0 0 5px;
+    font-size: 24px;
 }
 
 .airport-cta p {
-margin: 5px 0 10px;
-}
-
-/* =========================
-MOBILE CONTACT BUTTONS
-========================= */
-
-@media (max-width: 700px) {
-
-.floating-contact {
-    right: 12px;
-    bottom: 12px;
-}
-
-.floating-contact a {
-    width: 50px;
-    height: 50px;
-    font-size: 23px;
-}
-
-.airport-transfer {
-    margin: 16px 10px;
-    padding: 25px 16px;
-    border-radius: 13px;
-}
-
-.airport-card {
-    min-width: 100%;
-}
-
-.airport-cta {
-    padding: 20px 15px;
-}
-
-.airport-cta h3 {
-    font-size: 21px;
+    margin: 5px 0 10px;
 }
 
 /* =========================
@@ -610,10 +493,122 @@ MOBILE CONTACT BUTTONS
     color: #444;
 }
 
-
-/* Mobile */
+/* =========================
+   MOBILE
+========================= */
 
 @media (max-width: 700px) {
+
+    header {
+        padding: 22px 12px;
+    }
+
+    header h1 {
+        font-size: 27px;
+    }
+
+    header p {
+        font-size: 15px;
+    }
+
+    .hero {
+        padding: 55px 15px;
+    }
+
+    .hero h2 {
+        font-size: 34px;
+    }
+
+    .hero-text {
+        font-size: 16px;
+    }
+
+    .hero-buttons {
+        display: block;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .services-section,
+    .why-us,
+    .booking,
+    .destinations,
+    .contact {
+        margin: 16px 10px;
+        padding: 25px 16px;
+        border-radius: 13px;
+    }
+
+    .section-heading h2 {
+        font-size: 25px;
+    }
+
+    .service {
+        min-width: 100%;
+    }
+
+    .booking input,
+    .booking select {
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 14px;
+        font-size: 17px;
+    }
+
+    #fare {
+        font-size: 19px;
+    }
+
+    .destination-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .destination-list span {
+        text-align: center;
+    }
+
+    /* Floating buttons */
+
+    .floating-contact {
+        right: 12px;
+        bottom: 12px;
+    }
+
+    .floating-contact a {
+        width: 50px;
+        height: 50px;
+        font-size: 23px;
+    }
+
+    /* Airport transfer */
+
+    .airport-transfer {
+        margin: 16px 10px;
+        padding: 25px 16px;
+        border-radius: 13px;
+    }
+
+    .airport-card {
+        min-width: 100%;
+    }
+
+    .airport-cta {
+        padding: 20px 15px;
+    }
+
+    .airport-cta h3 {
+        font-size: 21px;
+    }
+
+    /* Pickup process */
 
     .pickup-process {
         margin: 16px 10px;
