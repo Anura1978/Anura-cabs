@@ -534,4 +534,105 @@ MOBILE CONTACT BUTTONS
     font-size: 21px;
 }
 
+/* =========================
+   AIRPORT PICKUP PROCESS
+========================= */
+
+.pickup-process {
+    max-width: 1000px;
+    margin: 28px auto;
+    padding: 40px 28px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+}
+
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.process-card {
+    text-align: center;
+    padding: 24px 16px;
+    background: #f8f9fa;
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+    transition: 0.3s ease;
+}
+
+.process-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.09);
+}
+
+.step-number {
+    width: 42px;
+    height: 42px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: #ffc107;
+    color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.process-card h3 {
+    font-size: 19px;
+    margin: 8px 0 12px;
+}
+
+.process-card p {
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.tourist-note {
+    margin-top: 30px;
+    padding: 25px;
+    text-align: center;
+    background: #fff3cd;
+    border-radius: 12px;
+}
+
+.tourist-note h3 {
+    margin: 0 0 8px;
+    font-size: 22px;
+}
+
+.tourist-note p {
+    line-height: 1.6;
+    color: #444;
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .pickup-process {
+        margin: 16px 10px;
+        padding: 28px 16px;
+    }
+
+    .process-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .process-card {
+        padding: 25px 18px;
+    }
+
+    .tourist-note {
+        padding: 22px 15px;
+    }
+
+    .tourist-note h3 {
+        font-size: 20px;
+    }
 }
