@@ -287,4 +287,154 @@ async function calculateRouteDistance() {
         distanceButton.innerHTML =
             "📍 Calculate Distance";
     }
+/* =========================
+   BOOKING CONFIRMATION CARD
+========================= */
+
+function showConfirmationCard() {
+
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const vehicle = document.getElementById("vehicle").value;
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+    const pickup = document.getElementById("pickup").value.trim();
+    const destination = document.getElementById("destination").value.trim();
+    const distance = Number(document.getElementById("distance").value);
+
+    if (
+        name === "" ||
+        phone === "" ||
+        vehicle === "" ||
+        date === "" ||
+        time === "" ||
+        pickup === "" ||
+        destination === "" ||
+        !distance ||
+        distance <= 0
+    ) {
+        alert("Please complete the booking details first.");
+        return;
+    }
+
+    let fare = 0;
+
+    if (vehicle === "Car") {
+        fare = distance * 120;
+
+    } else if (vehicle === "Mini Van") {
+        fare = distance * 150;
+
+    } else if (vehicle === "Van") {
+
+        if (distance <= 10) {
+            fare = 3000;
+        } else {
+            fare = 3000 + ((distance - 10) * 180);
+        }
+
+    } else if (vehicle === "SUV") {
+        fare = distance * 200;
+    }
+
+
+    document.getElementById("confirmName").textContent = name;
+    document.getElementById("confirmPhone").textContent = phone;
+    document.getElementById("confirmVehicle").textContent = vehicle;
+    document.getElementById("confirmDate").textContent = date;
+    document.getElementById("confirmTime").textContent = time;
+    document.getElementById("confirmPickup").textContent = pickup;
+    document.getElementById("confirmDestination").textContent = destination;
+    document.getElementById("confirmDistance").textContent =
+        distance + " KM";
+
+    document.getElementById("confirmFare").textContent =
+        fare.toLocaleString();
+
+
+    const card =
+        document.getElementById("confirmationCard");
+
+    card.style.display = "block";
+
+    card.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
+
+/* =========================
+   SEND CONFIRMATION
+========================= */
+
+function sendConfirmationWhatsApp() {
+
+    const name =
+        document.getElementById("confirmName").textContent;
+
+    const phone =
+        document.getElementById("confirmPhone").textContent;
+
+    const vehicle =
+        document.getElementById("confirmVehicle").textContent;
+
+    const date =
+        document.getElementById("confirmDate").textContent;
+
+    const time =
+        document.getElementById("confirmTime").textContent;
+
+    const pickup =
+        document.getElementById("confirmPickup").textContent;
+
+    const destination =
+        document.getElementById("confirmDestination").textContent;
+
+    const distance =
+        document.getElementById("confirmDistance").textContent;
+
+    const fare =
+        document.getElementById("confirmFare").textContent;
+
+
+    const message =
+`🚖 ANURA CABS – BOOKING CONFIRMED ✅
+
+👤 Customer: ${name}
+📱 Phone: ${phone}
+
+🚗 Vehicle: ${vehicle}
+
+📅 Date: ${date}
+⏰ Time: ${time}
+
+📍 Pickup:
+${pickup}
+
+📍 Destination:
+${destination}
+
+📏 Distance:
+${distance}
+
+💰 Confirmed Fare:
+LKR ${fare}
+
+Thank you for choosing Anura Cabs 🇱🇰
+
+Safe & Reliable Taxi Service in Sri Lanka.`;
+
+
+    const whatsappURL =
+        "https://wa.me/" +
+        phone.replace(/\D/g, "") +
+        "?text=" +
+        encodeURIComponent(message);
+
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
 }
