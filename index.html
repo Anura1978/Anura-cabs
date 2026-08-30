@@ -773,7 +773,107 @@
 
 </section>
 
+<!-- =========================
+     BOOKING CONFIRMATION
+========================= -->
 
+<section class="confirmation-card" id="confirmationCard" style="display: none;">
+
+    <div class="confirmation-header">
+
+        <h2>🚖 Anura Cabs 🇱🇰</h2>
+
+        <div class="confirmed-badge">
+            ✅ BOOKING CONFIRMED
+        </div>
+
+    </div>
+
+
+    <div class="confirmation-details">
+
+        <div class="confirmation-row">
+            <span class="confirmation-label">👤 Customer</span>
+            <span class="confirmation-value" id="confirmName"></span>
+        </div>
+
+        <div class="confirmation-row">
+            <span class="confirmation-label">📱 Phone</span>
+            <span class="confirmation-value" id="confirmPhone"></span>
+        </div>
+
+        <div class="confirmation-row">
+            <span class="confirmation-label">🚗 Vehicle</span>
+            <span class="confirmation-value" id="confirmVehicle"></span>
+        </div>
+
+        <div class="confirmation-row">
+            <span class="confirmation-label">📅 Date</span>
+            <span class="confirmation-value" id="confirmDate"></span>
+        </div>
+
+        <div class="confirmation-row">
+            <span class="confirmation-label">⏰ Time</span>
+            <span class="confirmation-value" id="confirmTime"></span>
+        </div>
+
+        <div class="confirmation-row">
+            <span class="confirmation-label">📍 Pickup</span>
+            <span class="confirmation-value" id="confirmPickup"></span>
+        </div>
+
+        <div class="confirmation-row">
+            <span class="confirmation-label">📍 Destination</span>
+            <span class="confirmation-value" id="confirmDestination"></span>
+        </div>
+
+        <div class="confirmation-row">
+            <span class="confirmation-label">📏 Distance</span>
+            <span class="confirmation-value" id="confirmDistance"></span>
+        </div>
+
+    </div>
+
+
+    <div class="confirmation-fare">
+        💰 Fare: LKR <span id="confirmFare">0</span>
+    </div>
+
+
+    <div class="confirmation-footer">
+
+        <p>
+            Thank you for choosing Anura Cabs 🇱🇰
+        </p>
+
+        <p>
+            Safe & Reliable Taxi Service in Sri Lanka
+        </p>
+
+    </div>
+
+
+    <div class="confirmation-actions">
+
+        <button
+            type="button"
+            class="btn"
+            onclick="sendConfirmationWhatsApp()"
+        >
+            💬 Send to WhatsApp
+        </button>
+
+        <button
+            type="button"
+            class="btn"
+            onclick="window.print()"
+        >
+            🖨️ Print
+        </button>
+
+    </div>
+
+</section>
 <!-- =========================
      CONTACT
 ========================= -->
