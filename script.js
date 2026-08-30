@@ -410,162 +410,152 @@ try {
         "📍 Calculate Distance";
 }
 
-}
-
 /* =========================
-BOOKING CONFIRMATION CARD
+   BOOKING CONFIRMATION CARD
 ========================= */
 
 function showConfirmationCard() {
 
-const name =
-    document.getElementById("name").value.trim();
+    const name =
+        document.getElementById("name").value.trim();
 
-const phone =
-    document.getElementById("phone").value.trim();
+    const phone =
+        document.getElementById("phone").value.trim();
 
-const vehicle =
-    document.getElementById("vehicle").value;
+    const vehicle =
+        document.getElementById("vehicle").value;
 
-const date =
-    document.getElementById("date").value;
+    const date =
+        document.getElementById("date").value;
 
-const time =
-    document.getElementById("time").value;
+    const time =
+        document.getElementById("time").value;
 
-const pickup =
-    document.getElementById("pickup").value.trim();
+    const pickup =
+        document.getElementById("pickup").value.trim();
 
-const destination =
-    document.getElementById("destination").value.trim();
+    const destination =
+        document.getElementById("destination").value.trim();
 
-const distance =
-    Number(
-        document.getElementById("distance").value
-    );
-document.getElementById("confirmDriver").textContent =
-    document.getElementById("driverName").value.trim();
-
-document.getElementById("confirmVehicleNumber").textContent =
-    document.getElementById("vehicleNumber").value.trim();
-
-document.getElementById("confirmDriverPhone").textContent =
-    document.getElementById("driverPhone").value.trim();
-
-if (
-    name === "" ||
-    phone === "" ||
-    vehicle === "" ||
-    date === "" ||
-    time === "" ||
-    pickup === "" ||
-    destination === "" ||
-    !distance ||
-    distance <= 0
-) {
-
-    alert(
-        "Please complete the booking details first."
-    );
-
-    return;
-}
+    const distance =
+        Number(
+            document.getElementById("distance").value
+        );
 
 
-let fare = 0;
+    if (
+        name === "" ||
+        phone === "" ||
+        vehicle === "" ||
+        date === "" ||
+        time === "" ||
+        pickup === "" ||
+        destination === "" ||
+        !distance ||
+        distance <= 0
+    ) {
 
+        alert(
+            "Please complete the booking details first."
+        );
 
-if (vehicle === "Car") {
-
-    fare = distance * 120;
-
-} else if (vehicle === "Mini Van") {
-
-    fare = distance * 150;
-
-} else if (vehicle === "Van") {
-
-    if (distance <= 10) {
-
-        fare = 3000;
-
-    } else {
-
-        fare =
-            3000 +
-            ((distance - 10) * 180);
+        return;
     }
 
-} else if (vehicle === "SUV") {
 
-    fare = distance * 200;
-}
+    let fare = 0;
 
 
-document.getElementById(
-    "confirmName"
-).textContent = name;
+    if (vehicle === "Car") {
+
+        fare = distance * 120;
+
+    } else if (vehicle === "Mini Van") {
+
+        fare = distance * 150;
+
+    } else if (vehicle === "Van") {
+
+        if (distance <= 10) {
+
+            fare = 3000;
+
+        } else {
+
+            fare =
+                3000 +
+                ((distance - 10) * 180);
+        }
+
+    } else if (vehicle === "SUV") {
+
+        fare = distance * 200;
+    }
 
 
-document.getElementById(
-    "confirmPhone"
-).textContent = phone;
-
-
-document.getElementById(
-    "confirmVehicle"
-).textContent = vehicle;
-
-
-document.getElementById(
-    "confirmDate"
-).textContent = date;
-
-
-document.getElementById(
-    "confirmTime"
-).textContent = time;
-
-
-document.getElementById(
-    "confirmPickup"
-).textContent = pickup;
-
-
-document.getElementById(
-    "confirmDestination"
-).textContent = destination;
-
-
-document.getElementById(
-    "confirmDistance"
-).textContent =
-    distance + " KM";
-
-
-document.getElementById(
-    "confirmFare"
-).textContent =
-    fare.toLocaleString();
-
-
-const card =
     document.getElementById(
-        "confirmationCard"
-    );
+        "confirmName"
+    ).textContent = name;
 
 
-card.style.display =
-    "block";
+    document.getElementById(
+        "confirmPhone"
+    ).textContent = phone;
 
 
-card.scrollIntoView({
-    behavior: "smooth",
-    block: "center"
-});
+    document.getElementById(
+        "confirmVehicle"
+    ).textContent = vehicle;
+
+
+    document.getElementById(
+        "confirmDate"
+    ).textContent = date;
+
+
+    document.getElementById(
+        "confirmTime"
+    ).textContent = time;
+
+
+    document.getElementById(
+        "confirmPickup"
+    ).textContent = pickup;
+
+
+    document.getElementById(
+        "confirmDestination"
+    ).textContent = destination;
+
+
+    document.getElementById(
+        "confirmDistance"
+    ).textContent =
+        distance + " KM";
+
+
+    document.getElementById(
+        "confirmFare"
+    ).textContent =
+        fare.toLocaleString();
+
+
+    const card =
+        document.getElementById(
+            "confirmationCard"
+        );
+
+
+    card.style.display =
+        "block";
+
+
+    card.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
 
 }
-
 /* =========================
 SEND CONFIRMATION
 ========================= */
