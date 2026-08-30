@@ -443,7 +443,14 @@ const distance =
     Number(
         document.getElementById("distance").value
     );
+document.getElementById("confirmDriver").textContent =
+    document.getElementById("driverName").value.trim();
 
+document.getElementById("confirmVehicleNumber").textContent =
+    document.getElementById("vehicleNumber").value.trim();
+
+document.getElementById("confirmDriverPhone").textContent =
+    document.getElementById("driverPhone").value.trim();
 
 if (
     name === "" ||
