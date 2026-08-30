@@ -811,6 +811,8 @@
 
 </section>
 
+
+
 <!-- =========================
      BOOKING CONFIRMATION
 ========================= -->
@@ -870,17 +872,6 @@
             <span class="confirmation-value" id="confirmDistance"></span>
         </div>
 
-    </div>
-
-
-    <div class="confirmation-fare">
-        💰 Fare: LKR <span id="confirmFare">0</span>
-    </div>
-        <div class="confirmation-row">
-            <span class="confirmation-label">📏 Distance</span>
-            <span class="confirmation-value" id="confirmDistance"></span>
-        </div>
-
         <div class="confirmation-row">
             <span class="confirmation-label">👨‍✈️ Driver</span>
             <span class="confirmation-value" id="confirmDriver"></span>
@@ -903,6 +894,7 @@
         💰 Fare: LKR <span id="confirmFare">0</span>
     </div>
 
+
     <div class="confirmation-footer">
 
         <p>
@@ -923,7 +915,15 @@
             class="btn"
             onclick="sendConfirmationWhatsApp()"
         >
-            💬 Send to WhatsApp
+            💬 Send to Customer
+        </button>
+
+        <button
+            type="button"
+            class="btn"
+            onclick="sendDriverWhatsApp()"
+        >
+            👨‍✈️ Send to Driver
         </button>
 
         <button
@@ -937,6 +937,8 @@
     </div>
 
 </section>
+
+
 <!-- =========================
      CONTACT
 ========================= -->
