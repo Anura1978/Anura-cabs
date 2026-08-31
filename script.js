@@ -409,7 +409,6 @@ try {
     distanceButton.innerHTML =
         "📍 Calculate Distance";
 }
-} 
 
 /* =========================
    BOOKING CONFIRMATION CARD
@@ -499,6 +498,156 @@ function showConfirmationCard() {
 
         fare = distance * 200;
     }
+
+
+    /* Generate Booking ID */
+
+    const bookingId =
+        "AC-" +
+        new Date().getFullYear() +
+        "-" +
+        Math.floor(
+            10000 + Math.random() * 90000
+        );
+
+
+    /* =========================
+       PREPARE CONFIRMATION CARD
+    ========================= */
+
+    document.getElementById(
+        "confirmBookingId"
+    ).textContent = bookingId;
+
+
+    document.getElementById(
+        "confirmStatus"
+    ).textContent = "PENDING";
+
+
+    document.getElementById(
+        "confirmName"
+    ).textContent = name;
+
+
+    document.getElementById(
+        "confirmPhone"
+    ).textContent = phone;
+
+
+    document.getElementById(
+        "confirmVehicle"
+    ).textContent = vehicle;
+
+
+    document.getElementById(
+        "confirmDate"
+    ).textContent = date;
+
+
+    document.getElementById(
+        "confirmTime"
+    ).textContent = time;
+
+
+    document.getElementById(
+        "confirmPickup"
+    ).textContent = pickup;
+
+
+    document.getElementById(
+        "confirmDestination"
+    ).textContent = destination;
+
+
+    document.getElementById(
+        "confirmDistance"
+    ).textContent =
+        distance + " KM";
+
+
+    document.getElementById(
+        "confirmFare"
+    ).textContent =
+        fare.toLocaleString();
+
+
+    /* Show confirmation card */
+
+    const card =
+        document.getElementById(
+            "confirmationCard"
+        );
+
+
+    card.style.display =
+        "block";
+
+
+    card.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+
+    /* =========================
+       SEND BOOKING TO ANURA CABS
+    ========================= */
+
+    const bookingMessage =
+
+`🚖 ANURA CABS – NEW TAXI BOOKING
+
+🆔 Booking ID:
+${bookingId}
+
+📌 Status:
+PENDING
+
+👤 CUSTOMER DETAILS
+
+Name: ${name}
+Phone: ${phone}
+Email: ${email || "Not provided"}
+
+🚗 JOURNEY DETAILS
+
+Vehicle: ${vehicle}
+Date: ${date}
+Time: ${time}
+
+📍 Pickup:
+${pickup}
+
+📍 Destination:
+${destination}
+
+📏 Distance:
+${distance} KM
+
+💰 Estimated Fare:
+LKR ${fare.toLocaleString()}
+
+⚠️ Please review this booking and assign a driver.
+
+Anura Cabs 🇱🇰
+Safe & Reliable Taxi Service in Sri Lanka.`;
+
+
+    const whatsappURL =
+        "https://wa.me/94761609536?text=" +
+        encodeURIComponent(bookingMessage);
+
+
+    /* Open WhatsApp in a new tab */
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+}
+
 
 
     /* =========================
