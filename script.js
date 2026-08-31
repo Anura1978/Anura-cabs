@@ -653,75 +653,8 @@ Safe & Reliable Taxi Service in Sri Lanka.`;
 
 
 
-    /* =========================
-       PREPARE CONFIRMATION CARD
-    ========================= */
-    /* Generate Booking ID */
-
-    const bookingId =
-        "AC-" +
-        new Date().getFullYear() +
-        "-" +
-        Math.floor(
-            10000 + Math.random() * 90000
-        );
 
 
-    document.getElementById(
-        "confirmBookingId"
-    ).textContent = bookingId;
-
-
-    document.getElementById(
-        "confirmStatus"
-    ).textContent = "PENDING";
-    document.getElementById(
-        "confirmName"
-    ).textContent = name;
-
-
-    document.getElementById(
-        "confirmPhone"
-    ).textContent = phone;
-
-
-    document.getElementById(
-        "confirmVehicle"
-    ).textContent = vehicle;
-
-
-    document.getElementById(
-        "confirmDate"
-    ).textContent = date;
-
-
-    document.getElementById(
-        "confirmTime"
-    ).textContent = time;
-
-
-    document.getElementById(
-        "confirmPickup"
-    ).textContent = pickup;
-
-
-    document.getElementById(
-        "confirmDestination"
-    ).textContent = destination;
-
-
-    document.getElementById(
-        "confirmDistance"
-    ).textContent =
-        distance + " KM";
-
-
-    document.getElementById(
-        "confirmFare"
-    ).textContent =
-        fare.toLocaleString();
-
-}
 
         
 /* =========================
