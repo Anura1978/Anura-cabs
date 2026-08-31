@@ -720,5 +720,64 @@ const whatsappURL =
 
 window.location.href =
     whatsappURL;
+    } 
+}/* =========================
+   ASSIGN DRIVER
+========================= */
+
+function assignDriver() {
+
+    const driverName =
+        document.getElementById("driverName").value.trim();
+
+    const driverPhone =
+        document.getElementById("driverPhone").value.trim();
+
+    const vehicleNumber =
+        document.getElementById("vehicleNumber").value.trim();
+
+
+    if (
+        driverName === "" ||
+        driverPhone === "" ||
+        vehicleNumber === ""
+    ) {
+
+        alert(
+            "Please enter Driver Name, Driver Phone and Vehicle Number."
+        );
+
+        return;
+    }
+
+
+    /* Change booking status */
+
+    document.getElementById(
+        "confirmStatus"
+    ).textContent = "DRIVER ASSIGNED";
+
+
+    /* Change confirmation badge */
+
+    const badge =
+        document.querySelector(".confirmed-badge");
+
+    if (badge) {
+
+        badge.textContent =
+            "🚖 DRIVER ASSIGNED";
+
+    }
+
+
+    /* Show assigned driver */
+
+    alert(
+        "Driver assigned successfully!\n\n" +
+        "Driver: " + driverName +
+        "\nPhone: " + driverPhone +
+        "\nVehicle: " + vehicleNumber
+    );
 
 }
