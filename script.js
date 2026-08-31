@@ -410,6 +410,7 @@ try {
         "📍 Calculate Distance";
 }
 } 
+
 /* =========================
    BOOKING CONFIRMATION CARD
 ========================= */
@@ -421,6 +422,9 @@ function showConfirmationCard() {
 
     const phone =
         document.getElementById("phone").value.trim();
+
+    const email =
+        document.getElementById("email").value.trim();
 
     const vehicle =
         document.getElementById("vehicle").value;
@@ -443,6 +447,8 @@ function showConfirmationCard() {
         );
 
 
+    /* Check required details */
+
     if (
         name === "" ||
         phone === "" ||
@@ -462,6 +468,8 @@ function showConfirmationCard() {
         return;
     }
 
+
+    /* Calculate fare */
 
     let fare = 0;
 
@@ -492,6 +500,59 @@ function showConfirmationCard() {
         fare = distance * 200;
     }
 
+
+    /* =========================
+       SEND BOOKING TO ANURA CABS
+    ========================= */
+
+    const bookingMessage =
+
+`🚖 ANURA CABS – NEW TAXI BOOKING
+
+👤 CUSTOMER DETAILS
+
+Name: ${name}
+Phone: ${phone}
+Email: ${email || "Not provided"}
+
+🚗 JOURNEY DETAILS
+
+Vehicle: ${vehicle}
+Date: ${date}
+Time: ${time}
+
+📍 Pickup:
+${pickup}
+
+📍 Destination:
+${destination}
+
+📏 Distance:
+${distance} KM
+
+💰 Estimated Fare:
+LKR ${fare.toLocaleString()}
+
+⚠️ Please review this booking and assign a driver.
+
+Anura Cabs 🇱🇰
+Safe & Reliable Taxi Service in Sri Lanka.`;
+
+
+    const whatsappURL =
+        "https://wa.me/94761609536?text=" +
+        encodeURIComponent(bookingMessage);
+
+
+    /* Open WhatsApp */
+
+    window.location.href =
+        whatsappURL;
+
+
+    /* =========================
+       PREPARE CONFIRMATION CARD
+    ========================= */
 
     document.getElementById(
         "confirmName"
@@ -539,23 +600,9 @@ function showConfirmationCard() {
     ).textContent =
         fare.toLocaleString();
 
-
-    const card =
-        document.getElementById(
-            "confirmationCard"
-        );
-
-
-    card.style.display =
-        "block";
-
-
-    card.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-    });
-
 }
+
+        
 /* =========================
 SEND CONFIRMATION
 ========================= */
