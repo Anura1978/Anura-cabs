@@ -553,7 +553,25 @@ Safe & Reliable Taxi Service in Sri Lanka.`;
     /* =========================
        PREPARE CONFIRMATION CARD
     ========================= */
+    /* Generate Booking ID */
 
+    const bookingId =
+        "AC-" +
+        new Date().getFullYear() +
+        "-" +
+        Math.floor(
+            10000 + Math.random() * 90000
+        );
+
+
+    document.getElementById(
+        "confirmBookingId"
+    ).textContent = bookingId;
+
+
+    document.getElementById(
+        "confirmStatus"
+    ).textContent = "PENDING";
     document.getElementById(
         "confirmName"
     ).textContent = name;
