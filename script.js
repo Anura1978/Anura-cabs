@@ -721,7 +721,7 @@ const whatsappURL =
 window.location.href =
     whatsappURL;
     } 
-}/* =========================
+/* =========================
    ASSIGN DRIVER
 ========================= */
 
