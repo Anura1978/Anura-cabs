@@ -650,53 +650,7 @@ Safe & Reliable Taxi Service in Sri Lanka.`;
 
 
 
-    /* =========================
-       SEND BOOKING TO ANURA CABS
-    ========================= */
 
-    const bookingMessage =
-
-`🚖 ANURA CABS – NEW TAXI BOOKING
-
-👤 CUSTOMER DETAILS
-
-Name: ${name}
-Phone: ${phone}
-Email: ${email || "Not provided"}
-
-🚗 JOURNEY DETAILS
-
-Vehicle: ${vehicle}
-Date: ${date}
-Time: ${time}
-
-📍 Pickup:
-${pickup}
-
-📍 Destination:
-${destination}
-
-📏 Distance:
-${distance} KM
-
-💰 Estimated Fare:
-LKR ${fare.toLocaleString()}
-
-⚠️ Please review this booking and assign a driver.
-
-Anura Cabs 🇱🇰
-Safe & Reliable Taxi Service in Sri Lanka.`;
-
-
-    const whatsappURL =
-        "https://wa.me/94761609536?text=" +
-        encodeURIComponent(bookingMessage);
-
-
-    /* Open WhatsApp */
-
-    window.location.href =
-        whatsappURL;
 
 
     /* =========================
