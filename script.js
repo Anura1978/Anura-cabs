@@ -409,7 +409,7 @@ try {
     distanceButton.innerHTML =
         "📍 Calculate Distance";
 }
-
+} 
 /* =========================
    BOOKING CONFIRMATION CARD
 ========================= */
