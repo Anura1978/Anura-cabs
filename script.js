@@ -808,7 +808,6 @@ Safe & Reliable Taxi Service in Sri Lanka.`;
         whatsappURL;
 }
 
-
 /* =========================
    ASSIGN DRIVER
 ========================= */
@@ -845,7 +844,7 @@ function assignDriver() {
     }
 
 
-    /* Change status */
+    /* Change booking status */
 
     document.getElementById(
         "confirmStatus"
@@ -853,7 +852,7 @@ function assignDriver() {
         "DRIVER ASSIGNED";
 
 
-    /* Change badge */
+    /* Change confirmation badge */
 
     const badge =
         document.querySelector(
@@ -865,6 +864,41 @@ function assignDriver() {
 
         badge.textContent =
             "🚖 DRIVER ASSIGNED";
+    }
+
+
+    /* =========================
+       CUSTOMER DRIVER DISPLAY
+    ========================= */
+
+    document.getElementById(
+        "customerDriverName"
+    ).textContent =
+        driverName;
+
+    document.getElementById(
+        "customerDriverPhone"
+    ).textContent =
+        driverPhone;
+
+    document.getElementById(
+        "customerVehicleNumber"
+    ).textContent =
+        vehicleNumber;
+
+
+    /* Show Customer Driver Card */
+
+    const customerDriverCard =
+        document.getElementById(
+            "customerDriverCard"
+        );
+
+
+    if (customerDriverCard) {
+
+        customerDriverCard.style.display =
+            "block";
     }
 
 
@@ -880,6 +914,8 @@ function assignDriver() {
         vehicleNumber
     );
 }
+
+    if
 /* =========================
    SEND BOOKING TO DRIVER
 ========================= */
