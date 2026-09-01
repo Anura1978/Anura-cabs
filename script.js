@@ -928,8 +928,13 @@ function sendDriverWhatsApp() {
     }
 
 
-    const cleanPhone =
-        driverPhone.replace(/\D/g, "");
+let cleanPhone =
+    driverPhone.replace(/\D/g, "");
+
+if (cleanPhone.startsWith("0")) {
+    cleanPhone =
+        "94" + cleanPhone.substring(1);
+}
 
 
     const message =
