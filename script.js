@@ -1,161 +1,161 @@
 function updateFare() {
 
-const vehicle =
-    document.getElementById("vehicle").value;
+    const vehicle =
+        document.getElementById("vehicle").value;
 
-const distance =
-    Number(document.getElementById("distance").value);
+    const distance =
+        Number(document.getElementById("distance").value);
 
-const fareElement =
-    document.getElementById("fare");
-
-
-if (!vehicle || !distance || distance <= 0) {
-
-    fareElement.innerHTML =
-        "Estimated Fare: LKR 0";
-
-    return;
-}
+    const fareElement =
+        document.getElementById("fare");
 
 
-let fare = 0;
+    if (!vehicle || !distance || distance <= 0) {
 
+        fareElement.innerHTML =
+            "Estimated Fare: LKR 0";
 
-if (vehicle === "Car") {
-
-    fare = distance * 120;
-
-} else if (vehicle === "Mini Van") {
-
-    fare = distance * 150;
-
-} else if (vehicle === "Van") {
-
-    if (distance <= 10) {
-
-        fare = 3000;
-
-    } else {
-
-        fare =
-            3000 +
-            ((distance - 10) * 180);
+        return;
     }
 
-} else if (vehicle === "SUV") {
 
-    fare = distance * 200;
+    let fare = 0;
+
+
+    if (vehicle === "Car") {
+
+        fare = distance * 120;
+
+    } else if (vehicle === "Mini Van") {
+
+        fare = distance * 150;
+
+    } else if (vehicle === "Van") {
+
+        if (distance <= 10) {
+
+            fare = 3000;
+
+        } else {
+
+            fare =
+                3000 +
+                ((distance - 10) * 180);
+        }
+
+    } else if (vehicle === "SUV") {
+
+        fare = distance * 200;
+    }
+
+
+    fareElement.innerHTML =
+        "💰 Estimated Fare: LKR " +
+        fare.toLocaleString();
 }
 
-
-fareElement.innerHTML =
-    "💰 Estimated Fare: LKR " +
-    fare.toLocaleString();
-
-}
 
 /* =========================
-CALCULATE FARE
+   CALCULATE FARE
 ========================= */
 
 function calculateFare() {
 
-const name =
-    document.getElementById("name").value.trim();
+    const name =
+        document.getElementById("name").value.trim();
 
-const phone =
-    document.getElementById("phone").value.trim();
+    const phone =
+        document.getElementById("phone").value.trim();
 
-const email =
-    document.getElementById("email").value.trim();
+    const email =
+        document.getElementById("email").value.trim();
 
-const vehicle =
-    document.getElementById("vehicle").value;
+    const vehicle =
+        document.getElementById("vehicle").value;
 
-const date =
-    document.getElementById("date").value;
+    const date =
+        document.getElementById("date").value;
 
-const time =
-    document.getElementById("time").value;
+    const time =
+        document.getElementById("time").value;
 
-const pickup =
-    document.getElementById("pickup").value.trim();
+    const pickup =
+        document.getElementById("pickup").value.trim();
 
-const destination =
-    document.getElementById("destination").value.trim();
+    const destination =
+        document.getElementById("destination").value.trim();
 
-const distance =
-    document.getElementById("distance").value.trim();
-
-
-if (
-    name === "" ||
-    phone === "" ||
-    vehicle === "" ||
-    date === "" ||
-    time === "" ||
-    pickup === "" ||
-    destination === "" ||
-    distance === ""
-) {
-
-    alert(
-        "Please fill in all required booking details."
-    );
-
-    return;
-}
+    const distance =
+        document.getElementById("distance").value.trim();
 
 
-const distanceNumber =
-    Number(distance);
+    if (
+        name === "" ||
+        phone === "" ||
+        vehicle === "" ||
+        date === "" ||
+        time === "" ||
+        pickup === "" ||
+        destination === "" ||
+        distance === ""
+    ) {
 
+        alert(
+            "Please fill in all required booking details."
+        );
 
-if (
-    isNaN(distanceNumber) ||
-    distanceNumber <= 0
-) {
-
-    alert(
-        "Please enter a valid distance in KM."
-    );
-
-    return;
-}
-
-
-let fare = 0;
-
-
-if (vehicle === "Car") {
-
-    fare = distanceNumber * 120;
-
-} else if (vehicle === "Mini Van") {
-
-    fare = distanceNumber * 150;
-
-} else if (vehicle === "Van") {
-
-    if (distanceNumber <= 10) {
-
-        fare = 3000;
-
-    } else {
-
-        fare =
-            3000 +
-            ((distanceNumber - 10) * 180);
+        return;
     }
 
-} else if (vehicle === "SUV") {
 
-    fare = distanceNumber * 200;
-}
+    const distanceNumber =
+        Number(distance);
 
 
-const message =
+    if (
+        isNaN(distanceNumber) ||
+        distanceNumber <= 0
+    ) {
+
+        alert(
+            "Please enter a valid distance in KM."
+        );
+
+        return;
+    }
+
+
+    let fare = 0;
+
+
+    if (vehicle === "Car") {
+
+        fare = distanceNumber * 120;
+
+    } else if (vehicle === "Mini Van") {
+
+        fare = distanceNumber * 150;
+
+    } else if (vehicle === "Van") {
+
+        if (distanceNumber <= 10) {
+
+            fare = 3000;
+
+        } else {
+
+            fare =
+                3000 +
+                ((distanceNumber - 10) * 180);
+        }
+
+    } else if (vehicle === "SUV") {
+
+        fare = distanceNumber * 200;
+    }
+
+
+    const message =
 
 `🚖 ANURA CABS – TAXI BOOKING
 
@@ -184,171 +184,53 @@ LKR ${fare.toLocaleString()}
 Thank you for choosing Anura Cabs 🇱🇰
 Safe & Reliable Taxi Service in Sri Lanka.`;
 
-const whatsappURL =
-    "https://wa.me/94761609536?text=" +
-    encodeURIComponent(message);
+
+    const whatsappURL =
+        "https://wa.me/94761609536?text=" +
+        encodeURIComponent(message);
 
 
-window.location.href =
-    whatsappURL;
-
+    window.location.href =
+        whatsappURL;
 }
 
+
 /* =========================
-BOOK TAXI
+   BOOK TAXI
 ========================= */
 
 function bookTaxi() {
 
-showConfirmationCard();
+    showConfirmationCard();
 
 }
 
+
 /* =========================
-LOCATION SEARCH
+   LOCATION SEARCH
 ========================= */
 
 async function getCoordinates(location) {
 
-const url =
-    "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" +
-    encodeURIComponent(
-        location + ", Sri Lanka"
-    );
-
-
-const response =
-    await fetch(url);
-
-
-if (!response.ok) {
-
-    throw new Error(
-        "Location service unavailable"
-    );
-}
-
-
-const data =
-    await response.json();
-
-
-if (data.length === 0) {
-
-    return null;
-}
-
-
-return {
-
-    lat: Number(data[0].lat),
-
-    lon: Number(data[0].lon)
-};
-
-}
-
-/* =========================
-CALCULATE ROUTE DISTANCE
-========================= */
-
-async function calculateRouteDistance() {
-
-const pickup =
-    document.getElementById("pickup").value.trim();
-
-const destination =
-    document.getElementById("destination").value.trim();
-
-
-if (
-    pickup === "" ||
-    destination === ""
-) {
-
-    alert(
-        "Please enter both Pickup Location and Destination."
-    );
-
-    return;
-}
-
-
-const distanceInput =
-    document.getElementById("distance");
-
-const fareElement =
-    document.getElementById("fare");
-
-const distanceButton =
-    document.querySelector(".distance-btn");
-
-
-try {
-
-    distanceButton.disabled = true;
-
-    distanceButton.innerHTML =
-        "⏳ Calculating Distance...";
-
-
-    distanceInput.value = "";
-
-    fareElement.innerHTML =
-        "📍 Calculating route...";
-
-
-    const pickupCoords =
-        await getCoordinates(pickup);
-
-
-    if (!pickupCoords) {
-
-        alert(
-            "Pickup location could not be found. Please enter a valid Sri Lankan location."
+    const url =
+        "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" +
+        encodeURIComponent(
+            location + ", Sri Lanka"
         );
-
-        fareElement.innerHTML =
-            "Estimated Fare: LKR 0";
-
-        return;
-    }
-
-
-    const destinationCoords =
-        await getCoordinates(destination);
-
-
-    if (!destinationCoords) {
-
-        alert(
-            "Destination could not be found. Please enter a valid Sri Lankan location."
-        );
-
-        fareElement.innerHTML =
-            "Estimated Fare: LKR 0";
-
-        return;
-    }
-
-
-    const routeURL =
-        "https://router.project-osrm.org/route/v1/driving/" +
-        pickupCoords.lon + "," +
-        pickupCoords.lat + ";" +
-        destinationCoords.lon + "," +
-        destinationCoords.lat +
-        "?overview=false";
 
 
     const response =
-        await fetch(routeURL);
+        await fetch(url, {
+            headers: {
+                "Accept": "application/json"
+            }
+        });
 
 
     if (!response.ok) {
 
         throw new Error(
-            "Route service unavailable"
+            "Location service unavailable"
         );
     }
 
@@ -358,58 +240,190 @@ try {
 
 
     if (
-        data.code !== "Ok" ||
-        !data.routes ||
-        data.routes.length === 0
+        !data ||
+        data.length === 0
+    ) {
+
+        return null;
+    }
+
+
+    return {
+
+        lat: Number(data[0].lat),
+
+        lon: Number(data[0].lon)
+
+    };
+}
+
+
+/* =========================
+   CALCULATE ROUTE DISTANCE
+========================= */
+
+async function calculateRouteDistance() {
+
+    const pickup =
+        document.getElementById("pickup").value.trim();
+
+    const destination =
+        document.getElementById("destination").value.trim();
+
+
+    if (
+        pickup === "" ||
+        destination === ""
     ) {
 
         alert(
-            "A driving route could not be found between these locations."
+            "Please enter both Pickup Location and Destination."
         );
-
-        fareElement.innerHTML =
-            "Estimated Fare: LKR 0";
 
         return;
     }
 
 
-    const distanceKM =
-        (
-            data.routes[0].distance / 1000
-        ).toFixed(1);
+    const distanceInput =
+        document.getElementById("distance");
+
+    const fareElement =
+        document.getElementById("fare");
+
+    const distanceButton =
+        document.querySelector(".distance-btn");
 
 
-    distanceInput.value =
-        distanceKM;
+    try {
+
+        distanceButton.disabled = true;
+
+        distanceButton.innerHTML =
+            "⏳ Calculating Distance...";
 
 
-    updateFare();
+        distanceInput.value = "";
+
+        fareElement.innerHTML =
+            "📍 Calculating route...";
 
 
-} catch (error) {
+        /* Find Pickup */
 
-    console.error(error);
-
-
-    alert(
-        "Unable to calculate the distance right now. Please try again."
-    );
+        const pickupCoords =
+            await getCoordinates(pickup);
 
 
-    fareElement.innerHTML =
-        "Estimated Fare: LKR 0";
+        if (!pickupCoords) {
+
+            throw new Error(
+                "Pickup location could not be found."
+            );
+        }
 
 
-} finally {
+        /* Find Destination */
 
-    distanceButton.disabled = false;
+        const destinationCoords =
+            await getCoordinates(destination);
 
 
-    distanceButton.innerHTML =
-        "📍 Calculate Distance";
+        if (!destinationCoords) {
+
+            throw new Error(
+                "Destination could not be found."
+            );
+        }
+
+
+        /* OSRM Route */
+
+        const routeURL =
+            "https://router.project-osrm.org/route/v1/driving/" +
+            pickupCoords.lon + "," +
+            pickupCoords.lat + ";" +
+            destinationCoords.lon + "," +
+            destinationCoords.lat +
+            "?overview=false";
+
+
+        const response =
+            await fetch(routeURL);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Route service unavailable."
+            );
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            data.code !== "Ok" ||
+            !data.routes ||
+            data.routes.length === 0
+        ) {
+
+            throw new Error(
+                "A driving route could not be found."
+            );
+        }
+
+
+        /* Convert metres to KM */
+
+        const distanceKM =
+            (
+                data.routes[0].distance / 1000
+            ).toFixed(1);
+
+
+        /* Put distance into input */
+
+        distanceInput.value =
+            distanceKM;
+
+
+        /* Calculate fare */
+
+        updateFare();
+
+
+    } catch (error) {
+
+        console.error(
+            "Distance calculation error:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "Unable to calculate the distance right now. Please try again."
+        );
+
+
+        distanceInput.value = "";
+
+        fareElement.innerHTML =
+            "Estimated Fare: LKR 0";
+
+
+    } finally {
+
+        distanceButton.disabled = false;
+
+        distanceButton.innerHTML =
+            "📍 Calculate Distance";
+    }
 }
-} 
+
+
 /* =========================
    BOOKING CONFIRMATION CARD
 ========================= */
@@ -445,8 +459,6 @@ function showConfirmationCard() {
             document.getElementById("distance").value
         );
 
-
-    /* Check required details */
 
     if (
         name === "" ||
@@ -511,53 +523,60 @@ function showConfirmationCard() {
         );
 
 
-    /* =========================
-       PREPARE CONFIRMATION CARD
-    ========================= */
+    /* Confirmation Card */
 
     document.getElementById(
         "confirmBookingId"
-    ).textContent = bookingId;
+    ).textContent =
+        bookingId;
 
 
     document.getElementById(
         "confirmStatus"
-    ).textContent = "PENDING";
+    ).textContent =
+        "PENDING";
 
 
     document.getElementById(
         "confirmName"
-    ).textContent = name;
+    ).textContent =
+        name;
 
 
     document.getElementById(
         "confirmPhone"
-    ).textContent = phone;
+    ).textContent =
+        phone;
 
 
     document.getElementById(
         "confirmVehicle"
-    ).textContent = vehicle;
+    ).textContent =
+        vehicle;
 
 
     document.getElementById(
         "confirmDate"
-    ).textContent = date;
+    ).textContent =
+        date;
 
 
     document.getElementById(
         "confirmTime"
-    ).textContent = time;
+    ).textContent =
+        time;
 
 
     document.getElementById(
         "confirmPickup"
-    ).textContent = pickup;
+    ).textContent =
+        pickup;
 
 
     document.getElementById(
         "confirmDestination"
-    ).textContent = destination;
+    ).textContent =
+        destination;
 
 
     document.getElementById(
@@ -572,7 +591,7 @@ function showConfirmationCard() {
         fare.toLocaleString();
 
 
-    /* Show confirmation card */
+    /* Show Card */
 
     const card =
         document.getElementById(
@@ -588,6 +607,7 @@ function showConfirmationCard() {
         behavior: "smooth",
         block: "center"
     });
+}
 
 
 /* =========================
@@ -597,34 +617,54 @@ function showConfirmationCard() {
 function sendBookingWhatsApp() {
 
     const bookingId =
-        document.getElementById("confirmBookingId").textContent;
+        document.getElementById(
+            "confirmBookingId"
+        ).textContent;
 
     const name =
-        document.getElementById("confirmName").textContent;
+        document.getElementById(
+            "confirmName"
+        ).textContent;
 
     const phone =
-        document.getElementById("confirmPhone").textContent;
+        document.getElementById(
+            "confirmPhone"
+        ).textContent;
 
     const vehicle =
-        document.getElementById("confirmVehicle").textContent;
+        document.getElementById(
+            "confirmVehicle"
+        ).textContent;
 
     const date =
-        document.getElementById("confirmDate").textContent;
+        document.getElementById(
+            "confirmDate"
+        ).textContent;
 
     const time =
-        document.getElementById("confirmTime").textContent;
+        document.getElementById(
+            "confirmTime"
+        ).textContent;
 
     const pickup =
-        document.getElementById("confirmPickup").textContent;
+        document.getElementById(
+            "confirmPickup"
+        ).textContent;
 
     const destination =
-        document.getElementById("confirmDestination").textContent;
+        document.getElementById(
+            "confirmDestination"
+        ).textContent;
 
     const distance =
-        document.getElementById("confirmDistance").textContent;
+        document.getElementById(
+            "confirmDistance"
+        ).textContent;
 
     const fare =
-        document.getElementById("confirmFare").textContent;
+        document.getElementById(
+            "confirmFare"
+        ).textContent;
 
 
     const message =
@@ -676,75 +716,59 @@ Safe & Reliable Taxi Service in Sri Lanka.`;
 }
 
 
-
-
-
-
-
-
-
-        
 /* =========================
-SEND CONFIRMATION
+   SEND CONFIRMATION
 ========================= */
 
 function sendConfirmationWhatsApp() {
 
-const name =
-    document.getElementById(
-        "confirmName"
-    ).textContent;
+    const name =
+        document.getElementById(
+            "confirmName"
+        ).textContent;
+
+    const phone =
+        document.getElementById(
+            "confirmPhone"
+        ).textContent;
+
+    const vehicle =
+        document.getElementById(
+            "confirmVehicle"
+        ).textContent;
+
+    const date =
+        document.getElementById(
+            "confirmDate"
+        ).textContent;
+
+    const time =
+        document.getElementById(
+            "confirmTime"
+        ).textContent;
+
+    const pickup =
+        document.getElementById(
+            "confirmPickup"
+        ).textContent;
+
+    const destination =
+        document.getElementById(
+            "confirmDestination"
+        ).textContent;
+
+    const distance =
+        document.getElementById(
+            "confirmDistance"
+        ).textContent;
+
+    const fare =
+        document.getElementById(
+            "confirmFare"
+        ).textContent;
 
 
-const phone =
-    document.getElementById(
-        "confirmPhone"
-    ).textContent;
-
-
-const vehicle =
-    document.getElementById(
-        "confirmVehicle"
-    ).textContent;
-
-
-const date =
-    document.getElementById(
-        "confirmDate"
-    ).textContent;
-
-
-const time =
-    document.getElementById(
-        "confirmTime"
-    ).textContent;
-
-
-const pickup =
-    document.getElementById(
-        "confirmPickup"
-    ).textContent;
-
-
-const destination =
-    document.getElementById(
-        "confirmDestination"
-    ).textContent;
-
-
-const distance =
-    document.getElementById(
-        "confirmDistance"
-    ).textContent;
-
-
-const fare =
-    document.getElementById(
-        "confirmFare"
-    ).textContent;
-
-
-const message =
+    const message =
 
 `🚖 ANURA CABS – BOOKING CONFIRMED ✅
 
@@ -774,16 +798,17 @@ Thank you for choosing Anura Cabs 🇱🇰
 
 Safe & Reliable Taxi Service in Sri Lanka.`;
 
-/* Anura Cabs WhatsApp number */
 
-const whatsappURL =
-    "https://wa.me/94761609536?text=" +
-    encodeURIComponent(message);
+    const whatsappURL =
+        "https://wa.me/94761609536?text=" +
+        encodeURIComponent(message);
 
 
-window.location.href =
-    whatsappURL;
-    } 
+    window.location.href =
+        whatsappURL;
+}
+
+
 /* =========================
    ASSIGN DRIVER
 ========================= */
@@ -791,13 +816,19 @@ window.location.href =
 function assignDriver() {
 
     const driverName =
-        document.getElementById("driverName").value.trim();
+        document.getElementById(
+            "driverName"
+        ).value.trim();
 
     const driverPhone =
-        document.getElementById("driverPhone").value.trim();
+        document.getElementById(
+            "driverPhone"
+        ).value.trim();
 
     const vehicleNumber =
-        document.getElementById("vehicleNumber").value.trim();
+        document.getElementById(
+            "vehicleNumber"
+        ).value.trim();
 
 
     if (
@@ -814,33 +845,38 @@ function assignDriver() {
     }
 
 
-    /* Change booking status */
+    /* Change status */
 
     document.getElementById(
         "confirmStatus"
-    ).textContent = "DRIVER ASSIGNED";
+    ).textContent =
+        "DRIVER ASSIGNED";
 
 
-    /* Change confirmation badge */
+    /* Change badge */
 
     const badge =
-        document.querySelector(".confirmed-badge");
+        document.querySelector(
+            ".confirmed-badge"
+        );
+
 
     if (badge) {
 
         badge.textContent =
             "🚖 DRIVER ASSIGNED";
-
     }
 
 
-    /* Show assigned driver */
+    /* Success message */
 
     alert(
         "Driver assigned successfully!\n\n" +
-        "Driver: " + driverName +
-        "\nPhone: " + driverPhone +
-        "\nVehicle: " + vehicleNumber
+        "Driver: " +
+        driverName +
+        "\nPhone: " +
+        driverPhone +
+        "\nVehicle: " +
+        vehicleNumber
     );
-
 }
