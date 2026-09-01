@@ -261,7 +261,12 @@ async function getCoordinates(location) {
 /* =========================
    CALCULATE ROUTE DISTANCE
 ========================= */
+async function calculateRouteDistance() {
 
+    alert("Calculate Distance button is working!");
+
+    const pickup =
+        document.getElementById("pickup").value.trim();
 async function calculateRouteDistance() {
 
     const pickup =
