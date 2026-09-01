@@ -1040,8 +1040,13 @@ function sendDriverDetailsToCustomer() {
     }
 
 
-    const cleanPhone =
-        customerPhone.replace(/\D/g, "");
+let cleanPhone =
+    customerPhone.replace(/\D/g, "");
+
+if (cleanPhone.startsWith("0")) {
+    cleanPhone =
+        "94" + cleanPhone.substring(1);
+}
 
 
     const message =
