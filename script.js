@@ -590,11 +590,44 @@ function showConfirmationCard() {
     });
 
 
-    /* =========================
-       SEND BOOKING TO ANURA CABS
-    ========================= */
+/* =========================
+   SEND BOOKING TO ANURA CABS
+========================= */
 
-    const bookingMessage =
+function sendBookingWhatsApp() {
+
+    const bookingId =
+        document.getElementById("confirmBookingId").textContent;
+
+    const name =
+        document.getElementById("confirmName").textContent;
+
+    const phone =
+        document.getElementById("confirmPhone").textContent;
+
+    const vehicle =
+        document.getElementById("confirmVehicle").textContent;
+
+    const date =
+        document.getElementById("confirmDate").textContent;
+
+    const time =
+        document.getElementById("confirmTime").textContent;
+
+    const pickup =
+        document.getElementById("confirmPickup").textContent;
+
+    const destination =
+        document.getElementById("confirmDestination").textContent;
+
+    const distance =
+        document.getElementById("confirmDistance").textContent;
+
+    const fare =
+        document.getElementById("confirmFare").textContent;
+
+
+    const message =
 
 `🚖 ANURA CABS – NEW TAXI BOOKING
 
@@ -608,7 +641,6 @@ PENDING
 
 Name: ${name}
 Phone: ${phone}
-Email: ${email || "Not provided"}
 
 🚗 JOURNEY DETAILS
 
@@ -623,10 +655,10 @@ ${pickup}
 ${destination}
 
 📏 Distance:
-${distance} KM
+${distance}
 
 💰 Estimated Fare:
-LKR ${fare.toLocaleString()}
+LKR ${fare}
 
 ⚠️ Please review this booking and assign a driver.
 
@@ -636,16 +668,11 @@ Safe & Reliable Taxi Service in Sri Lanka.`;
 
     const whatsappURL =
         "https://wa.me/94761609536?text=" +
-        encodeURIComponent(bookingMessage);
+        encodeURIComponent(message);
 
 
-    /* Open WhatsApp in a new tab */
-
-    window.open(
-        whatsappURL,
-        "_blank"
-    );
-
+    window.location.href =
+        whatsappURL;
 }
 
 
