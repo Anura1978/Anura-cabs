@@ -920,7 +920,7 @@ function assignDriver() {
     );
 }
 
-    if
+
 /* =========================
    SEND BOOKING TO DRIVER
 ========================= */
