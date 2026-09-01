@@ -880,3 +880,208 @@ function assignDriver() {
         vehicleNumber
     );
 }
+/* =========================
+   SEND BOOKING TO DRIVER
+========================= */
+
+function sendDriverWhatsApp() {
+
+    const driverPhone =
+        document.getElementById("driverPhone").value.trim();
+
+    const driverName =
+        document.getElementById("driverName").value.trim();
+
+    const vehicleNumber =
+        document.getElementById("vehicleNumber").value.trim();
+
+    const bookingId =
+        document.getElementById("confirmBookingId").textContent;
+
+    const date =
+        document.getElementById("confirmDate").textContent;
+
+    const time =
+        document.getElementById("confirmTime").textContent;
+
+    const pickup =
+        document.getElementById("confirmPickup").textContent;
+
+    const destination =
+        document.getElementById("confirmDestination").textContent;
+
+    const distance =
+        document.getElementById("confirmDistance").textContent;
+
+
+    if (
+        driverName === "" ||
+        driverPhone === "" ||
+        vehicleNumber === ""
+    ) {
+
+        alert(
+            "Please assign a driver first."
+        );
+
+        return;
+    }
+
+
+    const cleanPhone =
+        driverPhone.replace(/\D/g, "");
+
+
+    const message =
+
+`🚖 ANURA CABS – DRIVER ASSIGNMENT
+
+🆔 Booking ID:
+${bookingId}
+
+👤 Driver:
+${driverName}
+
+🚗 Vehicle:
+${vehicleNumber}
+
+📅 Date:
+${date}
+
+⏰ Time:
+${time}
+
+📍 Pickup:
+${pickup}
+
+📍 Destination:
+${destination}
+
+📏 Distance:
+${distance}
+
+Please accept this booking and contact the customer if necessary.
+
+Anura Cabs 🇱🇰`;
+
+
+    const whatsappURL =
+        "https://wa.me/" +
+        cleanPhone +
+        "?text=" +
+        encodeURIComponent(message);
+
+
+    window.location.href =
+        whatsappURL;
+}
+
+
+/* =========================
+   SEND DRIVER DETAILS TO CUSTOMER
+========================= */
+
+function sendDriverDetailsToCustomer() {
+
+    const customerPhone =
+        document.getElementById("confirmPhone").textContent.trim();
+
+    const driverName =
+        document.getElementById("driverName").value.trim();
+
+    const driverPhone =
+        document.getElementById("driverPhone").value.trim();
+
+    const vehicleNumber =
+        document.getElementById("vehicleNumber").value.trim();
+
+    const bookingId =
+        document.getElementById("confirmBookingId").textContent;
+
+    const date =
+        document.getElementById("confirmDate").textContent;
+
+    const time =
+        document.getElementById("confirmTime").textContent;
+
+    const pickup =
+        document.getElementById("confirmPickup").textContent;
+
+    const destination =
+        document.getElementById("confirmDestination").textContent;
+
+
+    if (
+        driverName === "" ||
+        driverPhone === "" ||
+        vehicleNumber === ""
+    ) {
+
+        alert(
+            "Please assign a driver first."
+        );
+
+        return;
+    }
+
+
+    if (customerPhone === "") {
+
+        alert(
+            "Customer phone number is missing."
+        );
+
+        return;
+    }
+
+
+    const cleanPhone =
+        customerPhone.replace(/\D/g, "");
+
+
+    const message =
+
+`🚖 ANURA CABS – DRIVER DETAILS
+
+✅ Your driver has been assigned.
+
+🆔 Booking ID:
+${bookingId}
+
+👨‍✈️ Driver Name:
+${driverName}
+
+📱 Driver Phone:
+${driverPhone}
+
+🚗 Vehicle Number:
+${vehicleNumber}
+
+📅 Date:
+${date}
+
+⏰ Time:
+${time}
+
+📍 Pickup:
+${pickup}
+
+📍 Destination:
+${destination}
+
+Your Anura Cabs driver is ready for your journey.
+
+Thank you for choosing Anura Cabs 🇱🇰
+Safe & Reliable Taxi Service in Sri Lanka.`;
+
+
+    const whatsappURL =
+        "https://wa.me/" +
+        cleanPhone +
+        "?text=" +
+        encodeURIComponent(message);
+
+
+    window.location.href =
+        whatsappURL;
+}
