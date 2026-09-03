@@ -1,1 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Anura Cabs - Admin Login</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .login-box {
+            max-width: 400px;
+            margin: 60px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            background: #222;
+            color: white;
+            font-size: 16px;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <h1>🚖 Anura Cabs</h1>
+
+    <h2>Admin Login</h2>
+
+    <input
+        type="email"
+        id="email"
+        placeholder="Admin Email"
+    >
+
+    <input
+        type="password"
+        id="password"
+        placeholder="Password"
+    >
+
+    <button id="loginBtn">
+        Login
+    </button>
+
+    <div id="message"></div>
+
+</div>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+    import {
+        getAuth,
+        signInWithEmailAndPassword
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCjjzQn62zxY8ZvfCzFkIRHm8ioNHgo34E",
+        authDomain: "anura-cabs.firebaseapp.com",
+        projectId: "anura-cabs",
+        storageBucket: "anura-cabs.firebasestorage.app",
+        messagingSenderId: "636799292252",
+        appId: "1:636799292252:web:0d57e77751c1a3179c6799"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    document.getElementById("loginBtn").addEventListener("click", async () => {
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+
+        const message = document.getElementById("message");
+
+        if (!email || !password) {
+            message.textContent = "Please enter email and password.";
+            return;
+        }
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+
+            message.textContent = "Login successful!";
+
+        } catch (error) {
+            message.textContent = "Login failed. Please check your details.";
+        }
+    });
+</script>
+</body>
+</html>
