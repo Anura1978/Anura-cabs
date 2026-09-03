@@ -117,9 +117,9 @@
 
             message.textContent = "Login successful!";
 
-        } catch (error) {
-            message.textContent = "Login failed. Please check your details.";
-        }
+} catch (error) {
+    message.textContent = error.code + " - " + error.message;
+}
     });
 </script>
 </body>
