@@ -127,7 +127,67 @@ import {
 
 
     async function loadBookings() {
+async function assignDriver(bookingId) {
 
+    const driverName =
+        document.getElementById(
+            `driverName-${bookingId}`
+        ).value.trim();
+
+    const driverPhone =
+        document.getElementById(
+            `driverPhone-${bookingId}`
+        ).value.trim();
+
+    const vehicleNumber =
+        document.getElementById(
+            `vehicleNumber-${bookingId}`
+        ).value.trim();
+
+
+    if (!driverName || !driverPhone || !vehicleNumber) {
+
+        alert(
+            "Please enter Driver Name, Driver Phone and Vehicle Number."
+        );
+
+        return;
+    }
+
+
+    try {
+
+        await updateDoc(
+            doc(db, "bookings", bookingId),
+            {
+                Driver: driverName,
+                DriverPhone: driverPhone,
+                VehicleNumber: vehicleNumber,
+                Status: "Assigned"
+            }
+        );
+
+
+        alert("Driver assigned successfully!");
+
+
+        await loadBookings();
+
+
+    } catch (error) {
+
+        console.error(
+            "Driver assignment error:",
+            error
+        );
+
+        alert(
+            "Failed to assign driver."
+        );
+
+    }
+
+}
         try {
 
             const querySnapshot =
