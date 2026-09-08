@@ -127,33 +127,17 @@ import {
 
 
     async function loadBookings() {
-async function assignDriver(bookingId) {
 
-    const driverName =
-        document.getElementById(
-            `driverName-${bookingId}`
-        ).value.trim();
+    } catch (error) {
 
-    const driverPhone =
-        document.getElementById(
-            `driverPhone-${bookingId}`
-        ).value.trim();
-
-    const vehicleNumber =
-        document.getElementById(
-            `vehicleNumber-${bookingId}`
-        ).value.trim();
-
-
-    if (!driverName || !driverPhone || !vehicleNumber) {
-
-        alert(
-            "Please enter Driver Name, Driver Phone and Vehicle Number."
+        console.error(
+            "Firestore error:",
+            error
         );
 
-        return;
     }
 
+}
 
     try {
 
