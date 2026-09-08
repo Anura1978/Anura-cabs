@@ -121,12 +121,135 @@ import {
 
     const app = initializeApp(firebaseConfig);
 
-    const auth = getAuth(app);
+    const app = initializeApp(firebaseConfig);
 
-    const db = getFirestore(app);
+const auth = getAuth(app);
+
+const db = getFirestore(app);
 
 
-    async function loadBookings() {
+async function loadBookings() {
+
+    try {
+
+        const querySnapshot =
+            await getDocs(collection(db, "bookings"));
+
+        const bookingsDiv =
+            document.getElementById("bookings");
+
+        bookingsDiv.innerHTML = "";
+
+
+        querySnapshot.forEach((bookingDoc) => {
+
+            const data = bookingDoc.data();
+
+
+            bookingsDiv.innerHTML += `
+
+                <div style="
+                    background:white;
+                    padding:20px;
+                    margin-top:20px;
+                    border-radius:12px;
+                    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+                ">
+
+                    <h3>
+                        🚖 Booking ID: ${bookingDoc.id}
+                    </h3>
+
+                    <p>
+                        <strong>Customer:</strong>
+                        ${data.customer || ""}
+                    </p>
+
+                    <p>
+                        <strong>Phone:</strong>
+                        ${data.Phone || ""}
+                    </p>
+
+                    <p>
+                        <strong>Vehicle:</strong>
+                        ${data.Vehicle || ""}
+                    </p>
+
+                    <p>
+                        <strong>Date:</strong>
+                        ${data.date || ""}
+                    </p>
+
+                    <p>
+                        <strong>Time:</strong>
+                        ${data.Time || ""}
+                    </p>
+
+                    <p>
+                        <strong>Pickup:</strong>
+                        ${data.pickup || ""}
+                    </p>
+
+                    <p>
+                        <strong>Destination:</strong>
+                        ${data.destination || ""}
+                    </p>
+
+                    <p>
+                        <strong>Distance:</strong>
+                        ${data.distance || ""} KM
+                    </p>
+
+                    <p>
+                        <strong>Fare:</strong>
+                        LKR ${data.Fare || ""}
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        ${data.Status || ""}
+                    </p>
+
+                    <p>
+                        <strong>Driver:</strong>
+                        ${data.Driver || "Not assigned"}
+                    </p>
+
+
+                    <div style="margin-top:15px;">
+
+                        <input
+                            type="text"
+                            id="driverName-${bookingDoc.id}"
+                            placeholder="Driver Name"
+                        >
+
+                        <input
+                            type="tel"
+                            id="driverPhone-${bookingDoc.id}"
+                            placeholder="Driver Phone"
+                        >
+
+                        <input
+                            type="text"
+                            id="vehicleNumber-${bookingDoc.id}"
+                            placeholder="Vehicle Number"
+                        >
+
+                        <button
+                            onclick="assignDriver('${bookingDoc.id}')"
+                        >
+                            👨‍✈️ Assign Driver
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        });
+
 
     } catch (error) {
 
@@ -138,6 +261,42 @@ import {
     }
 
 }
+
+
+async function assignDriver(bookingId) {
+
+    const driverName =
+        document.getElementById(
+            `driverName-${bookingId}`
+        ).value.trim();
+
+
+    const driverPhone =
+        document.getElementById(
+            `driverPhone-${bookingId}`
+        ).value.trim();
+
+
+    const vehicleNumber =
+        document.getElementById(
+            `vehicleNumber-${bookingId}`
+        ).value.trim();
+
+
+    if (
+        !driverName ||
+        !driverPhone ||
+        !vehicleNumber
+    ) {
+
+        alert(
+            "Please enter Driver Name, Driver Phone and Vehicle Number."
+        );
+
+        return;
+
+    }
+
 
     try {
 
@@ -152,7 +311,9 @@ import {
         );
 
 
-        alert("Driver assigned successfully!");
+        alert(
+            "Driver assigned successfully!"
+        );
 
 
         await loadBookings();
@@ -172,134 +333,6 @@ import {
     }
 
 }
-        try {
-
-            const querySnapshot =
-                await getDocs(collection(db, "bookings"));
-
-            const bookingsDiv =
-                document.getElementById("bookings");
-
-            bookingsDiv.innerHTML = "";
-
-
-            querySnapshot.forEach((doc) => {
-
-                const data = doc.data();
-
-
-                bookingsDiv.innerHTML += `
-
-                    <div style="
-                        background:white;
-                        padding:20px;
-                        margin-top:20px;
-                        border-radius:12px;
-                        box-shadow:0 3px 10px rgba(0,0,0,0.1);
-                    ">
-
-                        <h3>
-                            🚖 Booking ID: ${doc.id}
-                        </h3>
-
-                        <p>
-                            <strong>Customer:</strong>
-                            ${data.customer || ""}
-                        </p>
-
-                        <p>
-                            <strong>Phone:</strong>
-                            ${data.Phone || ""}
-                        </p>
-
-                        <p>
-                            <strong>Vehicle:</strong>
-                            ${data.Vehicle || ""}
-                        </p>
-
-                        <p>
-                            <strong>Date:</strong>
-                            ${data.date || ""}
-                        </p>
-
-                        <p>
-                            <strong>Time:</strong>
-                            ${data.Time || ""}
-                        </p>
-
-                        <p>
-                            <strong>Pickup:</strong>
-                            ${data.pickup || ""}
-                        </p>
-
-                        <p>
-                            <strong>Destination:</strong>
-                            ${data.destination || ""}
-                        </p>
-
-                        <p>
-                            <strong>Distance:</strong>
-                            ${data.distance || ""} KM
-                        </p>
-
-                        <p>
-                            <strong>Fare:</strong>
-                            LKR ${data.Fare || ""}
-                        </p>
-
-                        <p>
-                            <strong>Status:</strong>
-                            ${data.Status || ""}
-                        </p>
-
-                        <p>
-                            <strong>Driver:</strong>
-                            ${data.Driver || "Not assigned"}
-                        </p>
-<div style="margin-top:15px;">
-
-    <input
-        type="text"
-        id="driverName-${doc.id}"
-        placeholder="Driver Name"
-    >
-
-    <input
-        type="tel"
-        id="driverPhone-${doc.id}"
-        placeholder="Driver Phone"
-    >
-
-    <input
-        type="text"
-        id="vehicleNumber-${doc.id}"
-        placeholder="Vehicle Number"
-    >
-
-    <button
-        onclick="assignDriver('${doc.id}')"
-    >
-        👨‍✈️ Assign Driver
-    </button>
-
-</div>
-                    </div>
-
-                `;
-
-            });
-
-
-        } catch (error) {
-
-            console.error(
-                "Firestore error:",
-                error
-            );
-
-        }
-
-    }
 
 
     document
