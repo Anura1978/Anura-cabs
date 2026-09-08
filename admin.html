@@ -263,7 +263,7 @@ async function loadBookings() {
 
 
 async function assignDriver(bookingId) {
-window.assignDriver = assignDriver;
+
     const driverName =
         document.getElementById(
             `driverName-${bookingId}`
@@ -332,7 +332,7 @@ window.assignDriver = assignDriver;
     }
 
 }
-
+window.assignDriver = assignDriver;
 
     document
         .getElementById("loginBtn")
