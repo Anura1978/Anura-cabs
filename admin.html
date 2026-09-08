@@ -109,21 +109,71 @@ const db = getFirestore(app);
     try {
 
         const querySnapshot =
+            await getDocs(collection(db, "bookings")
+
+    async function loadBookings() {
+
+    try {
+
+        const querySnapshot =
             await getDocs(collection(db, "bookings"));
 
-        console.log("Bookings found:", querySnapshot.size);
+        const bookingsDiv =
+            document.getElementById("bookings");
+
+        bookingsDiv.innerHTML = "";
 
         querySnapshot.forEach((doc) => {
 
-            console.log(
-                "Booking ID:",
-                doc.id,
-                doc.data()
-            );
+            const data = doc.data();
+
+            bookingsDiv.innerHTML += `
+                <div style="
+                    background:white;
+                    padding:20px;
+                    margin-top:20px;
+                    border-radius:12px;
+                    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+                ">
+
+                    <h3>🚖 Booking ID: ${doc.id}</h3>
+
+                    <p><strong>Customer:</strong> ${data.customer || ""}</p>
+
+                    <p><strong>Phone:</strong> ${data.Phone || ""}</p>
+
+                    <p><strong>Vehicle:</strong> ${data.Vehicle || ""}</p>
+
+                    <p><strong>Date:</strong> ${data.date || ""}</p>
+
+                    <p><strong>Time:</strong> ${data.Time || ""}</p>
+
+                    <p><strong>Pickup:</strong> ${data.pickup || ""}</p>
+
+                    <p><strong>Destination:</strong> ${data.destination || ""}</p>
+
+                    <p><strong>Distance:</strong> ${data.distance || ""} KM</p>
+
+                    <p><strong>Fare:</strong> LKR ${data.Fare || ""}</p>
+
+                    <p><strong>Status:</strong> ${data.Status || ""}</p>
+
+                    <p><strong>Driver:</strong> ${data.Driver || "Not assigned"}</p>
+
+                </div>
+            `;
 
         });
 
     } catch (error) {
+
+        console.error(
+            "Firestore error:",
+            error
+        );
+
+    }
+}
 
         console.error(
             "Firestore error:",
