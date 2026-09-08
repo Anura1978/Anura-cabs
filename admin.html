@@ -211,7 +211,33 @@
                             <strong>Driver:</strong>
                             ${data.Driver || "Not assigned"}
                         </p>
+<div style="margin-top:15px;">
 
+    <input
+        type="text"
+        id="driverName-${doc.id}"
+        placeholder="Driver Name"
+    >
+
+    <input
+        type="tel"
+        id="driverPhone-${doc.id}"
+        placeholder="Driver Phone"
+    >
+
+    <input
+        type="text"
+        id="vehicleNumber-${doc.id}"
+        placeholder="Vehicle Number"
+    >
+
+    <button
+        onclick="assignDriver('${doc.id}')"
+    >
+        👨‍✈️ Assign Driver
+    </button>
+
+</div>
                     </div>
 
                 `;
