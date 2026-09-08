@@ -87,7 +87,11 @@
         getAuth,
         signInWithEmailAndPassword
     } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-
+import {
+    getFirestore,
+    collection,
+    getDocs
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
     const firebaseConfig = {
         apiKey: "AIzaSyCjjzQn62zxY8ZvfCzFkIRHm8ioNHgo34E",
         authDomain: "anura-cabs.firebaseapp.com",
@@ -99,7 +103,35 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+const db = getFirestore(app);
+    async function loadBookings() {
 
+    try {
+
+        const querySnapshot =
+            await getDocs(collection(db, "bookings"));
+
+        console.log("Bookings found:", querySnapshot.size);
+
+        querySnapshot.forEach((doc) => {
+
+            console.log(
+                "Booking ID:",
+                doc.id,
+                doc.data()
+            );
+
+        });
+
+    } catch (error) {
+
+        console.error(
+            "Firestore error:",
+            error
+        );
+
+    }
+}
     document.getElementById("loginBtn").addEventListener("click", async () => {
 
         const email = document.getElementById("email").value.trim();
@@ -116,7 +148,7 @@
             await signInWithEmailAndPassword(auth, email, password);
 
             message.textContent = "Login successful!";
-
+await loadBookings();
 } catch (error) {
     message.textContent = error.code + " - " + error.message;
 }
