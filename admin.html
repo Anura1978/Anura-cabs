@@ -81,128 +81,218 @@
     <div id="message"></div>
 <div id="bookings"></div>
 </div>
+
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+    import { initializeApp }
+        from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
     import {
         getAuth,
         signInWithEmailAndPassword
-    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-import {
-    getFirestore,
-    collection,
-    getDocs
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+    }
+        from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+    import {
+        getFirestore,
+        collection,
+        getDocs
+    }
+        from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
     const firebaseConfig = {
+
         apiKey: "AIzaSyCjjzQn62zxY8ZvfCzFkIRHm8ioNHgo34E",
+
         authDomain: "anura-cabs.firebaseapp.com",
+
         projectId: "anura-cabs",
+
         storageBucket: "anura-cabs.firebasestorage.app",
+
         messagingSenderId: "636799292252",
+
         appId: "1:636799292252:web:0d57e77751c1a3179c6799"
+
     };
 
+
     const app = initializeApp(firebaseConfig);
+
     const auth = getAuth(app);
-const db = getFirestore(app);
-    async function loadBookings() {
 
-    try {
+    const db = getFirestore(app);
 
-        const querySnapshot =
-            await getDocs(collection(db, "bookings")
 
     async function loadBookings() {
 
-    try {
+        try {
 
-        const querySnapshot =
-            await getDocs(collection(db, "bookings"));
+            const querySnapshot =
+                await getDocs(collection(db, "bookings"));
 
-        const bookingsDiv =
-            document.getElementById("bookings");
+            const bookingsDiv =
+                document.getElementById("bookings");
 
-        bookingsDiv.innerHTML = "";
+            bookingsDiv.innerHTML = "";
 
-        querySnapshot.forEach((doc) => {
 
-            const data = doc.data();
+            querySnapshot.forEach((doc) => {
 
-            bookingsDiv.innerHTML += `
-                <div style="
-                    background:white;
-                    padding:20px;
-                    margin-top:20px;
-                    border-radius:12px;
-                    box-shadow:0 3px 10px rgba(0,0,0,0.1);
-                ">
+                const data = doc.data();
 
-                    <h3>🚖 Booking ID: ${doc.id}</h3>
 
-                    <p><strong>Customer:</strong> ${data.customer || ""}</p>
+                bookingsDiv.innerHTML += `
 
-                    <p><strong>Phone:</strong> ${data.Phone || ""}</p>
+                    <div style="
+                        background:white;
+                        padding:20px;
+                        margin-top:20px;
+                        border-radius:12px;
+                        box-shadow:0 3px 10px rgba(0,0,0,0.1);
+                    ">
 
-                    <p><strong>Vehicle:</strong> ${data.Vehicle || ""}</p>
+                        <h3>
+                            🚖 Booking ID: ${doc.id}
+                        </h3>
 
-                    <p><strong>Date:</strong> ${data.date || ""}</p>
+                        <p>
+                            <strong>Customer:</strong>
+                            ${data.customer || ""}
+                        </p>
 
-                    <p><strong>Time:</strong> ${data.Time || ""}</p>
+                        <p>
+                            <strong>Phone:</strong>
+                            ${data.Phone || ""}
+                        </p>
 
-                    <p><strong>Pickup:</strong> ${data.pickup || ""}</p>
+                        <p>
+                            <strong>Vehicle:</strong>
+                            ${data.Vehicle || ""}
+                        </p>
 
-                    <p><strong>Destination:</strong> ${data.destination || ""}</p>
+                        <p>
+                            <strong>Date:</strong>
+                            ${data.date || ""}
+                        </p>
 
-                    <p><strong>Distance:</strong> ${data.distance || ""} KM</p>
+                        <p>
+                            <strong>Time:</strong>
+                            ${data.Time || ""}
+                        </p>
 
-                    <p><strong>Fare:</strong> LKR ${data.Fare || ""}</p>
+                        <p>
+                            <strong>Pickup:</strong>
+                            ${data.pickup || ""}
+                        </p>
 
-                    <p><strong>Status:</strong> ${data.Status || ""}</p>
+                        <p>
+                            <strong>Destination:</strong>
+                            ${data.destination || ""}
+                        </p>
 
-                    <p><strong>Driver:</strong> ${data.Driver || "Not assigned"}</p>
+                        <p>
+                            <strong>Distance:</strong>
+                            ${data.distance || ""} KM
+                        </p>
 
-                </div>
-            `;
+                        <p>
+                            <strong>Fare:</strong>
+                            LKR ${data.Fare || ""}
+                        </p>
+
+                        <p>
+                            <strong>Status:</strong>
+                            ${data.Status || ""}
+                        </p>
+
+                        <p>
+                            <strong>Driver:</strong>
+                            ${data.Driver || "Not assigned"}
+                        </p>
+
+                    </div>
+
+                `;
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Firestore error:",
+                error
+            );
+
+        }
+
+    }
+
+
+    document
+        .getElementById("loginBtn")
+        .addEventListener("click", async () => {
+
+
+            const email =
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
+
+
+            const message =
+                document.getElementById("message");
+
+
+            if (!email || !password) {
+
+                message.textContent =
+                    "Please enter email and password.";
+
+                return;
+
+            }
+
+
+            try {
+
+                await signInWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+
+                message.textContent =
+                    "Login successful!";
+
+
+                await loadBookings();
+
+
+            } catch (error) {
+
+                message.textContent =
+                    error.code +
+                    " - " +
+                    error.message;
+
+            }
 
         });
 
-    } catch (error) {
-
-        console.error(
-            "Firestore error:",
-            error
-        );
-
-    }
-}
-
-        console.error(
-            "Firestore error:",
-            error
-        );
-
-    }
-}
-    document.getElementById("loginBtn").addEventListener("click", async () => {
-
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value;
-
-        const message = document.getElementById("message");
-
-        if (!email || !password) {
-            message.textContent = "Please enter email and password.";
-            return;
-        }
-
-        try {
-            await signInWithEmailAndPassword(auth, email, password);
-
-            message.textContent = "Login successful!";
-await loadBookings();
-} catch (error) {
-    message.textContent = error.code + " - " + error.message;
-}
-    });
 </script>
+
+
+
 </body>
 </html>
