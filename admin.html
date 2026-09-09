@@ -731,13 +731,18 @@ async function sendCustomerWhatsApp(
 
 
 
-        const url =
+const customerPhone = booking.Phone.replace(/\D/g, "");
 
-            "https://wa.me/?text=" +
+const whatsappPhone =
+    customerPhone.startsWith("0")
+        ? "94" + customerPhone.substring(1)
+        : customerPhone;
 
-            encodeURIComponent(
-                message
-            );
+const url =
+    "https://wa.me/" +
+    whatsappPhone +
+    "?text=" +
+    encodeURIComponent(message);
 
 
 
