@@ -185,7 +185,9 @@ async function loadBookings() {
 
 
                 bookingsDiv.innerHTML += `
-
+let pendingCount = 0;
+let assignedCount = 0;
+let completedCount = 0;
                     <div style="
                         background:white;
                         padding:20px;
