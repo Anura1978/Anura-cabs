@@ -12,118 +12,69 @@
 
     <title>Anura Cabs - Admin Dashboard</title>
 
-
     <style>
 
         body {
-
             font-family: Arial, sans-serif;
-
             background: #f5f5f5;
-
             margin: 0;
-
             padding: 40px 20px;
-
         }
-
 
         .login-box {
-
             max-width: 400px;
-
             margin: 60px auto;
-
             background: white;
-
             padding: 30px;
-
             border-radius: 12px;
-
-            box-shadow:
-                0 4px 15px
-                rgba(0,0,0,0.1);
-
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-
 
         h1 {
-
             text-align: center;
-
         }
-
 
         input {
-
             width: 100%;
-
             box-sizing: border-box;
-
             padding: 12px;
-
             margin: 10px 0;
-
-            border:
-                1px solid #ccc;
-
+            border: 1px solid #ccc;
             border-radius: 8px;
-
         }
-
 
         button {
-
             width: 100%;
-
             padding: 12px;
-
             margin-top: 10px;
-
             border: none;
-
             border-radius: 8px;
-
             background: #222;
-
             color: white;
-
             font-size: 16px;
-
+            cursor: pointer;
         }
-
 
         #message {
-
             text-align: center;
-
             margin-top: 15px;
-
         }
 
-
         #bookings {
-
             margin-top: 20px;
-
         }
 
     </style>
 
 </head>
 
-
 <body>
-
 
 <div class="login-box">
 
-
     <h1>🚖 Anura Cabs</h1>
 
-
     <h2>Admin Login</h2>
-
 
     <input
         type="email"
@@ -131,98 +82,65 @@
         placeholder="Admin Email"
     >
 
-
     <input
         type="password"
         id="password"
         placeholder="Password"
     >
 
-
     <button id="loginBtn">
         Login
     </button>
 
-
     <div id="message"></div>
 
-
     <div id="bookings"></div>
-
 
 </div>
 
 
-
 <script type="module">
 
-
 import { initializeApp }
-
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
-
-
 import {
-
     getAuth,
-
     signInWithEmailAndPassword
-    setPersistence,
-    browserLocalPersistence
-
 }
-
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
-
-
 import {
-
     getFirestore,
-
     collection,
-
     getDocs,
-
     updateDoc,
-
     doc
-
 }
-
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
-
 
 
 const firebaseConfig = {
 
-
     apiKey:
         "AIzaSyCjjzQn62zxY8ZvfCzFkIRHm8ioNHgo34E",
-
 
     authDomain:
         "anura-cabs.firebaseapp.com",
 
-
     projectId:
         "anura-cabs",
-
 
     storageBucket:
         "anura-cabs.firebasestorage.app",
 
-
     messagingSenderId:
         "636799292252",
-
 
     appId:
         "1:636799292252:web:0d57e77751c1a3179c6799"
 
 };
-
 
 
 const app =
@@ -231,27 +149,19 @@ const app =
 const auth =
     getAuth(app);
 
-
-
 const db =
     getFirestore(app);
-
-
 
 
 /* =========================
    LOAD BOOKINGS
 ========================= */
 
-
 async function loadBookings() {
-
 
     try {
 
-
         const querySnapshot =
-
             await getDocs(
                 collection(
                     db,
@@ -259,25 +169,19 @@ async function loadBookings() {
                 )
             );
 
-
         const bookingsDiv =
-
             document.getElementById(
                 "bookings"
             );
 
-
         bookingsDiv.innerHTML = "";
-
 
 
         querySnapshot.forEach(
             (bookingDoc) => {
 
-
                 const data =
                     bookingDoc.data();
-
 
 
                 bookingsDiv.innerHTML += `
@@ -290,54 +194,45 @@ async function loadBookings() {
                         box-shadow:0 3px 10px rgba(0,0,0,0.1);
                     ">
 
-
                         <h3>
                             🚖 Booking ID:
                             ${bookingDoc.id}
                         </h3>
-
 
                         <p>
                             <strong>Customer:</strong>
                             ${data.customer || ""}
                         </p>
 
-
                         <p>
                             <strong>Phone:</strong>
                             ${data.Phone || ""}
                         </p>
-
 
                         <p>
                             <strong>Vehicle:</strong>
                             ${data.Vehicle || ""}
                         </p>
 
-
                         <p>
                             <strong>Date:</strong>
                             ${data.date || ""}
                         </p>
-
 
                         <p>
                             <strong>Time:</strong>
                             ${data.Time || ""}
                         </p>
 
-
                         <p>
                             <strong>Pickup:</strong>
                             ${data.pickup || ""}
                         </p>
 
-
                         <p>
                             <strong>Destination:</strong>
                             ${data.destination || ""}
                         </p>
-
 
                         <p>
                             <strong>Distance:</strong>
@@ -345,36 +240,30 @@ async function loadBookings() {
                             KM
                         </p>
 
-
                         <p>
                             <strong>Fare:</strong>
                             LKR ${data.Fare || ""}
                         </p>
-
 
                         <p>
                             <strong>Status:</strong>
                             ${data.Status || ""}
                         </p>
 
-
                         <p>
                             <strong>Driver:</strong>
                             ${data.Driver || "Not assigned"}
                         </p>
-
 
                         <p>
                             <strong>Driver Phone:</strong>
                             ${data.DriverPhone || ""}
                         </p>
 
-
                         <p>
                             <strong>Vehicle Number:</strong>
                             ${data.VehicleNumber || ""}
                         </p>
-
 
 
                         <button
@@ -388,13 +277,9 @@ async function loadBookings() {
                         </button>
 
 
-
-                        <div
-                            style="
-                                margin-top:15px;
-                            "
-                        >
-
+                        <div style="
+                            margin-top:15px;
+                        ">
 
                             <input
                                 type="text"
@@ -402,20 +287,17 @@ async function loadBookings() {
                                 placeholder="Driver Name"
                             >
 
-
                             <input
                                 type="tel"
                                 id="driverPhone-${bookingDoc.id}"
                                 placeholder="Driver Phone"
                             >
 
-
                             <input
                                 type="text"
                                 id="vehicleNumber-${bookingDoc.id}"
                                 placeholder="Vehicle Number"
                             >
-
 
                             <button
                                 onclick="
@@ -427,130 +309,93 @@ async function loadBookings() {
                                 👨‍✈️ Assign Driver
                             </button>
 
-<button
-    onclick="
-        window.completeBooking(
-            '${bookingDoc.id}'
-        )
-    "
->
-    ✅ Mark Completed
-</button>
-                        </div>
+                            <button
+                                onclick="
+                                    window.completeBooking(
+                                        '${bookingDoc.id}'
+                                    )
+                                "
+                            >
+                                ✅ Mark Completed
+                            </button>
 
+                        </div>
 
                     </div>
 
                 `;
 
             }
-
         );
-
 
     }
 
     catch (error) {
-
 
         console.error(
             "Firestore error:",
             error
         );
 
-
     }
 
 }
-
-
 
 
 /* =========================
    ASSIGN DRIVER
 ========================= */
 
-
 async function assignDriver(
     bookingId
 ) {
 
-
     const driverName =
-
         document.getElementById(
             `driverName-${bookingId}`
         ).value.trim();
 
-
-
     const driverPhone =
-
         document.getElementById(
             `driverPhone-${bookingId}`
         ).value.trim();
 
-
-
     const vehicleNumber =
-
         document.getElementById(
             `vehicleNumber-${bookingId}`
         ).value.trim();
 
 
-
     if (
-
         !driverName ||
-
         !driverPhone ||
-
         !vehicleNumber
-
     ) {
-
 
         alert(
             "Please enter Driver Name, Driver Phone and Vehicle Number."
         );
-
 
         return;
 
     }
 
 
-
     try {
 
-
         await updateDoc(
-
             doc(
                 db,
                 "bookings",
                 bookingId
             ),
-
             {
-
-                Driver:
-                    driverName,
-
-                DriverPhone:
-                    driverPhone,
-
-                VehicleNumber:
-                    vehicleNumber,
-
-                Status:
-                    "Assigned"
-
+                Driver: driverName,
+                DriverPhone: driverPhone,
+                VehicleNumber: vehicleNumber,
+                Status: "Assigned"
             }
-
         );
-
 
 
         alert(
@@ -558,56 +403,61 @@ async function assignDriver(
         );
 
 
-
         await loadBookings();
-
 
     }
 
     catch (error) {
-
 
         console.error(
             "Driver assignment error:",
             error
         );
 
-
         alert(
             "Failed to assign driver."
         );
-
 
     }
 
 }
 
-
-
-/*
-   MAKE FUNCTION AVAILABLE
-   TO HTML BUTTON
-*/
-
-
 window.assignDriver =
     assignDriver;
-async function completeBooking(bookingId) {
+
+
+/* =========================
+   COMPLETE BOOKING
+========================= */
+
+async function completeBooking(
+    bookingId
+) {
 
     try {
 
         await updateDoc(
-            doc(db, "bookings", bookingId),
+            doc(
+                db,
+                "bookings",
+                bookingId
+            ),
             {
                 Status: "Completed"
             }
         );
 
-        alert("Booking marked as Completed!");
+
+        alert(
+            "Booking marked as Completed!"
+        );
+
 
         await loadBookings();
 
-    } catch (error) {
+    }
+
+    catch (error) {
 
         console.error(
             "Complete booking error:",
@@ -617,7 +467,9 @@ async function completeBooking(bookingId) {
         alert(
             "Failed to complete booking."
         );
+
     }
+
 }
 
 window.completeBooking =
@@ -628,17 +480,13 @@ window.completeBooking =
    CUSTOMER WHATSAPP
 ========================= */
 
-
 async function sendCustomerWhatsApp(
     bookingId
 ) {
 
-
     try {
 
-
         const querySnapshot =
-
             await getDocs(
                 collection(
                     db,
@@ -651,20 +499,16 @@ async function sendCustomerWhatsApp(
             null;
 
 
-
         querySnapshot.forEach(
             (item) => {
-
 
                 if (
                     item.id ===
                     bookingId
                 ) {
 
-
                     bookingData =
                         item.data();
-
 
                 }
 
@@ -672,114 +516,99 @@ async function sendCustomerWhatsApp(
         );
 
 
-
         if (!bookingData) {
-
 
             alert(
                 "Booking not found."
             );
-
 
             return;
 
         }
 
 
-
         const message =
 
-
-            "🚖 *ANURA CABS - BOOKING CONFIRMATION*\\n\\n" +
-
+            "🚖 *ANURA CABS - BOOKING CONFIRMATION*\n\n" +
 
             "Booking ID: " +
             bookingId +
-            "\\n" +
-
+            "\n" +
 
             "Customer: " +
             (bookingData.customer || "") +
-            "\\n" +
-
+            "\n" +
 
             "Phone: " +
             (bookingData.Phone || "") +
-            "\\n\\n" +
-
+            "\n\n" +
 
             "📍 Pickup: " +
             (bookingData.pickup || "") +
-            "\\n" +
-
+            "\n" +
 
             "📍 Destination: " +
             (bookingData.destination || "") +
-            "\\n" +
-
+            "\n" +
 
             "📏 Distance: " +
             (bookingData.distance || "") +
-            " KM\\n" +
-
+            " KM\n" +
 
             "💰 Fare: LKR " +
             (bookingData.Fare || "") +
-            "\\n\\n" +
-
+            "\n\n" +
 
             "🚗 Vehicle: " +
             (bookingData.Vehicle || "") +
-            "\\n" +
-
+            "\n" +
 
             "📅 Date: " +
             (bookingData.date || "") +
-            "\\n" +
-
+            "\n" +
 
             "⏰ Time: " +
             (bookingData.Time || "") +
-            "\\n\\n" +
-
+            "\n\n" +
 
             "👨‍✈️ Driver: " +
             (bookingData.Driver || "Not assigned") +
-            "\\n" +
-
+            "\n" +
 
             "📞 Driver Phone: " +
             (bookingData.DriverPhone || "") +
-            "\\n" +
-
+            "\n" +
 
             "🚘 Vehicle Number: " +
             (bookingData.VehicleNumber || "") +
-            "\\n\\n" +
-
+            "\n\n" +
 
             "✅ Booking Status: " +
             (bookingData.Status || "") +
-            "\\n\\n" +
-
+            "\n\n" +
 
             "Thank you for choosing Anura Cabs! 🇱🇰";
 
 
-const customerPhone =
-    (bookingData.Phone || "").replace(/\D/g, "");
+        const customerPhone =
+            (bookingData.Phone || "")
+                .replace(/\D/g, "");
 
-const whatsappPhone =
-    customerPhone.startsWith("0")
-        ? "94" + customerPhone.substring(1)
-        : customerPhone;
 
-const url =
-    "https://wa.me/" +
-    whatsappPhone +
-    "?text=" +
-    encodeURIComponent(message);
+        const whatsappPhone =
+            customerPhone.startsWith("0")
+                ? "94" +
+                  customerPhone.substring(1)
+                : customerPhone;
 
+
+        const url =
+            "https://wa.me/" +
+            whatsappPhone +
+            "?text=" +
+            encodeURIComponent(
+                message
+            );
 
 
         window.open(
@@ -787,45 +616,30 @@ const url =
             "_blank"
         );
 
-
     }
 
     catch (error) {
-
 
         console.error(
             "WhatsApp error:",
             error
         );
 
-
         alert(
             "Failed to prepare WhatsApp message."
         );
-
 
     }
 
 }
 
-
-
-/*
-   MAKE FUNCTION AVAILABLE
-   TO HTML BUTTON
-*/
-
-
 window.sendCustomerWhatsApp =
     sendCustomerWhatsApp;
-
-
 
 
 /* =========================
    LOGIN
 ========================= */
-
 
 document
     .getElementById("loginBtn")
@@ -833,9 +647,7 @@ document
         "click",
         async () => {
 
-
             const email =
-
                 document
                     .getElementById(
                         "email"
@@ -844,9 +656,7 @@ document
                     .trim();
 
 
-
             const password =
-
                 document
                     .getElementById(
                         "password"
@@ -854,13 +664,10 @@ document
                     .value;
 
 
-
             const message =
-
                 document.getElementById(
                     "message"
                 );
-
 
 
             if (
@@ -868,61 +675,44 @@ document
                 !password
             ) {
 
-
                 message.textContent =
                     "Please enter email and password.";
-
 
                 return;
 
             }
 
 
-
             try {
 
-
                 await signInWithEmailAndPassword(
-
                     auth,
-
                     email,
-
                     password
-
                 );
-
 
 
                 message.textContent =
                     "Login successful!";
 
 
-
                 await loadBookings();
-
 
             }
 
             catch (error) {
 
-
                 message.textContent =
-
                     error.code +
                     " - " +
                     error.message;
 
-
             }
 
         }
-
     );
 
-
 </script>
-
 
 </body>
 
