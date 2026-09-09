@@ -228,21 +228,8 @@ const firebaseConfig = {
 const app =
     initializeApp(firebaseConfig);
 
-
 const auth =
     getAuth(app);
-
-setPersistence(
-    auth,
-    browserLocalPersistence
-).catch((error) => {
-
-    console.error(
-        "Auth persistence error:",
-        error
-    );
-
-});
 
 
 
