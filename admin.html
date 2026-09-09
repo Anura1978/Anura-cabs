@@ -219,11 +219,11 @@ async function loadBookings() {
     ${data.DriverPhone || ""}
 </p>
 
-<p>
-    <strong>Vehicle Number:</strong>
-    ${data.VehicleNumber || ""}
-</p>
-
+<button
+    onclick="sendCustomerWhatsApp('${bookingDoc.id}')"
+>
+    📲 Send Customer Confirmation
+</button>
 
                     <div style="margin-top:15px;">
 
