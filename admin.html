@@ -176,28 +176,33 @@ async function loadBookings() {
 
         bookingsDiv.innerHTML = "";
 
+        let pendingCount = 0;
+        let assignedCount = 0;
+        let completedCount = 0;
+
 
         querySnapshot.forEach(
             (bookingDoc) => {
 
                 const data =
                     bookingDoc.data();
-if (data.Status === "Pending") {
-    pendingCount++;
-}
 
-if (data.Status === "Assigned") {
-    assignedCount++;
-}
 
-if (data.Status === "Completed") {
-    completedCount++;
-}
+                if (data.Status === "Pending") {
+                    pendingCount++;
+                }
+
+                if (data.Status === "Assigned") {
+                    assignedCount++;
+                }
+
+                if (data.Status === "Completed") {
+                    completedCount++;
+                }
+
 
                 bookingsDiv.innerHTML += `
-let pendingCount = 0;
-let assignedCount = 0;
-let completedCount = 0;
+
                     <div style="
                         background:white;
                         padding:20px;
@@ -339,14 +344,17 @@ let completedCount = 0;
 
             }
         );
-document.getElementById("pendingCount").textContent =
-    pendingCount;
 
-document.getElementById("assignedCount").textContent =
-    assignedCount;
 
-document.getElementById("completedCount").textContent =
-    completedCount;
+        document.getElementById("pendingCount").textContent =
+            pendingCount;
+
+        document.getElementById("assignedCount").textContent =
+            assignedCount;
+
+        document.getElementById("completedCount").textContent =
+            completedCount;
+
     }
 
     catch (error) {
