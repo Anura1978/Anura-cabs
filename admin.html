@@ -584,7 +584,36 @@ async function assignDriver(
 
 window.assignDriver =
     assignDriver;
+async function completeBooking(bookingId) {
 
+    try {
+
+        await updateDoc(
+            doc(db, "bookings", bookingId),
+            {
+                Status: "Completed"
+            }
+        );
+
+        alert("Booking marked as Completed!");
+
+        await loadBookings();
+
+    } catch (error) {
+
+        console.error(
+            "Complete booking error:",
+            error
+        );
+
+        alert(
+            "Failed to complete booking."
+        );
+    }
+}
+
+window.completeBooking =
+    completeBooking;
 
 <button
     onclick="
