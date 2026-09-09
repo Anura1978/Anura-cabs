@@ -761,9 +761,7 @@ document
     </div>
 
 </div> 
-    <button id="notificationBtn">
-    🔔 Enable Notifications
-</button> 
+    
     <script>
 document.getElementById("notificationBtn").addEventListener("click", async function () {
 
@@ -777,7 +775,10 @@ document.getElementById("notificationBtn").addEventListener("click", async funct
     alert("Notification permission: " + permission);
 
 });
-</script>
+</script> 
+    <div id="newBookingAlert" style="display:none;">
+    🔔 NEW BOOKING!
+</div>
 </body>
 
 </html>
