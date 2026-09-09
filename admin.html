@@ -1,66 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Anura Cabs - Admin Login</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Anura Cabs - Admin Dashboard</title>
+
 
     <style>
+
         body {
+
             font-family: Arial, sans-serif;
+
             background: #f5f5f5;
+
             margin: 0;
+
             padding: 40px 20px;
+
         }
+
 
         .login-box {
+
             max-width: 400px;
+
             margin: 60px auto;
+
             background: white;
+
             padding: 30px;
+
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+            box-shadow:
+                0 4px 15px
+                rgba(0,0,0,0.1);
+
         }
+
 
         h1 {
+
             text-align: center;
+
         }
+
 
         input {
+
             width: 100%;
+
             box-sizing: border-box;
+
             padding: 12px;
+
             margin: 10px 0;
-            border: 1px solid #ccc;
+
+            border:
+                1px solid #ccc;
+
             border-radius: 8px;
+
         }
+
 
         button {
+
             width: 100%;
+
             padding: 12px;
+
             margin-top: 10px;
+
             border: none;
+
             border-radius: 8px;
+
             background: #222;
+
             color: white;
+
             font-size: 16px;
+
         }
 
+
         #message {
+
             text-align: center;
+
             margin-top: 15px;
+
         }
+
+
+        #bookings {
+
+            margin-top: 20px;
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
+
 <div class="login-box">
+
 
     <h1>🚖 Anura Cabs</h1>
 
+
     <h2>Admin Login</h2>
+
 
     <input
         type="email"
@@ -68,256 +131,418 @@
         placeholder="Admin Email"
     >
 
+
     <input
         type="password"
         id="password"
         placeholder="Password"
     >
 
+
     <button id="loginBtn">
         Login
     </button>
 
+
     <div id="message"></div>
-<div id="bookings"></div>
+
+
+    <div id="bookings"></div>
+
+
 </div>
+
+
 
 <script type="module">
 
-    import { initializeApp }
-        from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
-    import {
-        getAuth,
-        signInWithEmailAndPassword
-    }
-        from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+import { initializeApp }
+
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
 
 import {
+
+    getAuth,
+
+    signInWithEmailAndPassword
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+
+import {
+
     getFirestore,
+
     collection,
+
     getDocs,
+
     updateDoc,
+
     doc
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-    const firebaseConfig = {
 
-        apiKey: "AIzaSyCjjzQn62zxY8ZvfCzFkIRHm8ioNHgo34E",
-
-        authDomain: "anura-cabs.firebaseapp.com",
-
-        projectId: "anura-cabs",
-
-        storageBucket: "anura-cabs.firebasestorage.app",
-
-        messagingSenderId: "636799292252",
-
-        appId: "1:636799292252:web:0d57e77751c1a3179c6799"
-
-    };
+const firebaseConfig = {
 
 
-    const app = initializeApp(firebaseConfig);
+    apiKey:
+        "AIzaSyCjjzQn62zxY8ZvfCzFkIRHm8ioNHgo34E",
 
 
-const auth = getAuth(app);
+    authDomain:
+        "anura-cabs.firebaseapp.com",
 
-const db = getFirestore(app);
+
+    projectId:
+        "anura-cabs",
+
+
+    storageBucket:
+        "anura-cabs.firebasestorage.app",
+
+
+    messagingSenderId:
+        "636799292252",
+
+
+    appId:
+        "1:636799292252:web:0d57e77751c1a3179c6799"
+
+};
+
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+
+const auth =
+    getAuth(app);
+
+
+
+const db =
+    getFirestore(app);
+
+
+
+
+/* =========================
+   LOAD BOOKINGS
+========================= */
 
 
 async function loadBookings() {
 
+
     try {
 
+
         const querySnapshot =
-            await getDocs(collection(db, "bookings"));
+
+            await getDocs(
+                collection(
+                    db,
+                    "bookings"
+                )
+            );
+
 
         const bookingsDiv =
-            document.getElementById("bookings");
+
+            document.getElementById(
+                "bookings"
+            );
+
 
         bookingsDiv.innerHTML = "";
 
 
-        querySnapshot.forEach((bookingDoc) => {
 
-            const data = bookingDoc.data();
+        querySnapshot.forEach(
+            (bookingDoc) => {
 
 
-            bookingsDiv.innerHTML += `
+                const data =
+                    bookingDoc.data();
 
-                <div style="
-                    background:white;
-                    padding:20px;
-                    margin-top:20px;
-                    border-radius:12px;
-                    box-shadow:0 3px 10px rgba(0,0,0,0.1);
-                ">
 
-                    <h3>
-                        🚖 Booking ID: ${bookingDoc.id}
-                    </h3>
 
-                    <p>
-                        <strong>Customer:</strong>
-                        ${data.customer || ""}
-                    </p>
+                bookingsDiv.innerHTML += `
 
-                    <p>
-                        <strong>Phone:</strong>
-                        ${data.Phone || ""}
-                    </p>
+                    <div style="
+                        background:white;
+                        padding:20px;
+                        margin-top:20px;
+                        border-radius:12px;
+                        box-shadow:0 3px 10px rgba(0,0,0,0.1);
+                    ">
 
-                    <p>
-                        <strong>Vehicle:</strong>
-                        ${data.Vehicle || ""}
-                    </p>
 
-                    <p>
-                        <strong>Date:</strong>
-                        ${data.date || ""}
-                    </p>
+                        <h3>
+                            🚖 Booking ID:
+                            ${bookingDoc.id}
+                        </h3>
 
-                    <p>
-                        <strong>Time:</strong>
-                        ${data.Time || ""}
-                    </p>
 
-                    <p>
-                        <strong>Pickup:</strong>
-                        ${data.pickup || ""}
-                    </p>
+                        <p>
+                            <strong>Customer:</strong>
+                            ${data.customer || ""}
+                        </p>
 
-                    <p>
-                        <strong>Destination:</strong>
-                        ${data.destination || ""}
-                    </p>
 
-                    <p>
-                        <strong>Distance:</strong>
-                        ${data.distance || ""} KM
-                    </p>
+                        <p>
+                            <strong>Phone:</strong>
+                            ${data.Phone || ""}
+                        </p>
 
-                    <p>
-                        <strong>Fare:</strong>
-                        LKR ${data.Fare || ""}
-                    </p>
 
-                    <p>
-                        <strong>Status:</strong>
-                        ${data.Status || ""}
-                    </p>
+                        <p>
+                            <strong>Vehicle:</strong>
+                            ${data.Vehicle || ""}
+                        </p>
 
-        <p>
-    <strong>Driver:</strong>
-    ${data.Driver || "Not assigned"}
-</p>
 
-<p>
-    <strong>Driver Phone:</strong>
-    ${data.DriverPhone || ""}
-</p>
+                        <p>
+                            <strong>Date:</strong>
+                            ${data.date || ""}
+                        </p>
 
-<button
-    onclick="sendCustomerWhatsApp('${bookingDoc.id}')"
->
-    📲 Send Customer Confirmation
-</button>
 
-                    <div style="margin-top:15px;">
+                        <p>
+                            <strong>Time:</strong>
+                            ${data.Time || ""}
+                        </p>
 
-                        <input
-                            type="text"
-                            id="driverName-${bookingDoc.id}"
-                            placeholder="Driver Name"
-                        >
 
-                        <input
-                            type="tel"
-                            id="driverPhone-${bookingDoc.id}"
-                            placeholder="Driver Phone"
-                        >
+                        <p>
+                            <strong>Pickup:</strong>
+                            ${data.pickup || ""}
+                        </p>
 
-                        <input
-                            type="text"
-                            id="vehicleNumber-${bookingDoc.id}"
-                            placeholder="Vehicle Number"
-                        >
+
+                        <p>
+                            <strong>Destination:</strong>
+                            ${data.destination || ""}
+                        </p>
+
+
+                        <p>
+                            <strong>Distance:</strong>
+                            ${data.distance || ""}
+                            KM
+                        </p>
+
+
+                        <p>
+                            <strong>Fare:</strong>
+                            LKR ${data.Fare || ""}
+                        </p>
+
+
+                        <p>
+                            <strong>Status:</strong>
+                            ${data.Status || ""}
+                        </p>
+
+
+                        <p>
+                            <strong>Driver:</strong>
+                            ${data.Driver || "Not assigned"}
+                        </p>
+
+
+                        <p>
+                            <strong>Driver Phone:</strong>
+                            ${data.DriverPhone || ""}
+                        </p>
+
+
+                        <p>
+                            <strong>Vehicle Number:</strong>
+                            ${data.VehicleNumber || ""}
+                        </p>
+
+
 
                         <button
-                            onclick="assignDriver('${bookingDoc.id}')"
+                            onclick="
+                                window.sendCustomerWhatsApp(
+                                    '${bookingDoc.id}'
+                                )
+                            "
                         >
-                            👨‍✈️ Assign Driver
+                            📲 Send Customer Confirmation
                         </button>
+
+
+
+                        <div
+                            style="
+                                margin-top:15px;
+                            "
+                        >
+
+
+                            <input
+                                type="text"
+                                id="driverName-${bookingDoc.id}"
+                                placeholder="Driver Name"
+                            >
+
+
+                            <input
+                                type="tel"
+                                id="driverPhone-${bookingDoc.id}"
+                                placeholder="Driver Phone"
+                            >
+
+
+                            <input
+                                type="text"
+                                id="vehicleNumber-${bookingDoc.id}"
+                                placeholder="Vehicle Number"
+                            >
+
+
+                            <button
+                                onclick="
+                                    window.assignDriver(
+                                        '${bookingDoc.id}'
+                                    )
+                                "
+                            >
+                                👨‍✈️ Assign Driver
+                            </button>
+
+
+                        </div>
+
 
                     </div>
 
-                </div>
+                `;
 
-            `;
+            }
 
-        });
+        );
 
 
-    } catch (error) {
+    }
+
+    catch (error) {
+
 
         console.error(
             "Firestore error:",
             error
         );
 
+
     }
 
 }
 
 
-async function assignDriver(bookingId) {
+
+
+/* =========================
+   ASSIGN DRIVER
+========================= */
+
+
+async function assignDriver(
+    bookingId
+) {
+
 
     const driverName =
+
         document.getElementById(
             `driverName-${bookingId}`
         ).value.trim();
 
 
+
     const driverPhone =
+
         document.getElementById(
             `driverPhone-${bookingId}`
         ).value.trim();
 
 
+
     const vehicleNumber =
+
         document.getElementById(
             `vehicleNumber-${bookingId}`
         ).value.trim();
 
 
+
     if (
+
         !driverName ||
+
         !driverPhone ||
+
         !vehicleNumber
+
     ) {
+
 
         alert(
             "Please enter Driver Name, Driver Phone and Vehicle Number."
         );
+
 
         return;
 
     }
 
 
+
     try {
 
+
         await updateDoc(
-            doc(db, "bookings", bookingId),
+
+            doc(
+                db,
+                "bookings",
+                bookingId
+            ),
+
             {
-                Driver: driverName,
-                DriverPhone: driverPhone,
-                VehicleNumber: vehicleNumber,
-                Status: "Assigned"
+
+                Driver:
+                    driverName,
+
+                DriverPhone:
+                    driverPhone,
+
+                VehicleNumber:
+                    vehicleNumber,
+
+                Status:
+                    "Assigned"
+
             }
+
         );
+
 
 
         alert(
@@ -325,106 +550,339 @@ async function assignDriver(bookingId) {
         );
 
 
+
         await loadBookings();
 
 
-    } catch (error) {
+    }
+
+    catch (error) {
+
 
         console.error(
             "Driver assignment error:",
             error
         );
 
+
         alert(
             "Failed to assign driver."
         );
 
+
     }
 
 }
-async function sendCustomerWhatsApp(bookingId) {
+
+
+
+/*
+   MAKE FUNCTION AVAILABLE
+   TO HTML BUTTON
+*/
+
+
+window.assignDriver =
+    assignDriver;
+
+
+
+
+/* =========================
+   CUSTOMER WHATSAPP
+========================= */
+
+
+async function sendCustomerWhatsApp(
+    bookingId
+) {
+
 
     try {
 
-        const bookingDoc =
-            await getDocs(collection(db, "bookings"));
 
-        let bookingData = null;
+        const querySnapshot =
 
-        bookingDoc.forEach((item) => {
+            await getDocs(
+                collection(
+                    db,
+                    "bookings"
+                )
+            );
 
-            if (item.id === bookingId) {
-                bookingData = item.data();
+
+        let bookingData =
+            null;
+
+
+
+        querySnapshot.forEach(
+            (item) => {
+
+
+                if (
+                    item.id ===
+                    bookingId
+                ) {
+
+
+                    bookingData =
+                        item.data();
+
+
+                }
+
             }
+        );
 
-        });
 
 
         if (!bookingData) {
 
-            alert("Booking not found.");
+
+            alert(
+                "Booking not found."
+            );
+
 
             return;
 
         }
 
 
+
         const message =
-            "🚖 *ANURA CABS - BOOKING CONFIRMATION*\n\n" +
 
-            "Booking ID: " + bookingId + "\n" +
-            "Customer: " + (bookingData.customer || "") + "\n" +
-            "Phone: " + (bookingData.Phone || "") + "\n\n" +
 
-            "📍 Pickup: " + (bookingData.pickup || "") + "\n" +
-            "📍 Destination: " + (bookingData.destination || "") + "\n" +
-            "📏 Distance: " + (bookingData.distance || "") + " KM\n" +
-            "💰 Fare: LKR " + (bookingData.Fare || "") + "\n\n" +
+            "🚖 *ANURA CABS - BOOKING CONFIRMATION*\\n\\n" +
 
-            "🚗 Vehicle: " + (bookingData.Vehicle || "") + "\n" +
-            "📅 Date: " + (bookingData.date || "") + "\n" +
-            "⏰ Time: " + (bookingData.Time || "") + "\n\n" +
 
-            "👨‍✈️ Driver: " + (bookingData.Driver || "Not assigned") + "\n" +
-            "📞 Driver Phone: " + (bookingData.DriverPhone || "") + "\n" +
-            "🚘 Vehicle Number: " + (bookingData.VehicleNumber || "") + "\n\n" +
+            "Booking ID: " +
+            bookingId +
+            "\\n" +
 
-            "✅ Booking Status: " + (bookingData.Status || "") + "\n\n" +
+
+            "Customer: " +
+            (bookingData.customer || "") +
+            "\\n" +
+
+
+            "Phone: " +
+            (bookingData.Phone || "") +
+            "\\n\\n" +
+
+
+            "📍 Pickup: " +
+            (bookingData.pickup || "") +
+            "\\n" +
+
+
+            "📍 Destination: " +
+            (bookingData.destination || "") +
+            "\\n" +
+
+
+            "📏 Distance: " +
+            (bookingData.distance || "") +
+            " KM\\n" +
+
+
+            "💰 Fare: LKR " +
+            (bookingData.Fare || "") +
+            "\\n\\n" +
+
+
+            "🚗 Vehicle: " +
+            (bookingData.Vehicle || "") +
+            "\\n" +
+
+
+            "📅 Date: " +
+            (bookingData.date || "") +
+            "\\n" +
+
+
+            "⏰ Time: " +
+            (bookingData.Time || "") +
+            "\\n\\n" +
+
+
+            "👨‍✈️ Driver: " +
+            (bookingData.Driver || "Not assigned") +
+            "\\n" +
+
+
+            "📞 Driver Phone: " +
+            (bookingData.DriverPhone || "") +
+            "\\n" +
+
+
+            "🚘 Vehicle Number: " +
+            (bookingData.VehicleNumber || "") +
+            "\\n\\n" +
+
+
+            "✅ Booking Status: " +
+            (bookingData.Status || "") +
+            "\\n\\n" +
+
 
             "Thank you for choosing Anura Cabs! 🇱🇰";
 
 
+
         const url =
+
             "https://wa.me/?text=" +
-            encodeURIComponent(message);
+
+            encodeURIComponent(
+                message
+            );
 
 
-        window.open(url, "_blank");
+
+        window.open(
+            url,
+            "_blank"
+        );
 
 
-    } catch (error) {
+    }
+
+    catch (error) {
+
 
         console.error(
             "WhatsApp error:",
             error
         );
 
+
         alert(
             "Failed to prepare WhatsApp message."
         );
+
 
     }
 
 }
 
-}
 
-window.assignDriver = assignDriver;
 
-async function sendCustomerWhatsApp(bookingId) {
-window.sendCustomerWhatsApp = sendCustomerWhatsApp;
+/*
+   MAKE FUNCTION AVAILABLE
+   TO HTML BUTTON
+*/
+
+
+window.sendCustomerWhatsApp =
+    sendCustomerWhatsApp;
+
+
+
+
+/* =========================
+   LOGIN
+========================= */
+
+
+document
+    .getElementById("loginBtn")
+    .addEventListener(
+        "click",
+        async () => {
+
+
+            const email =
+
+                document
+                    .getElementById(
+                        "email"
+                    )
+                    .value
+                    .trim();
+
+
+
+            const password =
+
+                document
+                    .getElementById(
+                        "password"
+                    )
+                    .value;
+
+
+
+            const message =
+
+                document.getElementById(
+                    "message"
+                );
+
+
+
+            if (
+                !email ||
+                !password
+            ) {
+
+
+                message.textContent =
+                    "Please enter email and password.";
+
+
+                return;
+
+            }
+
+
+
+            try {
+
+
+                await signInWithEmailAndPassword(
+
+                    auth,
+
+                    email,
+
+                    password
+
+                );
+
+
+
+                message.textContent =
+                    "Login successful!";
+
+
+
+                await loadBookings();
+
+
+            }
+
+            catch (error) {
+
+
+                message.textContent =
+
+                    error.code +
+                    " - " +
+                    error.message;
+
+
+            }
+
+        }
+
+    );
+
 
 </script>
 
+
 </body>
+
 </html>
