@@ -182,7 +182,17 @@ async function loadBookings() {
 
                 const data =
                     bookingDoc.data();
+if (data.Status === "Pending") {
+    pendingCount++;
+}
 
+if (data.Status === "Assigned") {
+    assignedCount++;
+}
+
+if (data.Status === "Completed") {
+    completedCount++;
+}
 
                 bookingsDiv.innerHTML += `
 let pendingCount = 0;
