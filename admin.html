@@ -730,8 +730,8 @@ async function sendCustomerWhatsApp(
             "Thank you for choosing Anura Cabs! 🇱🇰";
 
 
-
-const customerPhone = booking.Phone.replace(/\D/g, "");
+const customerPhone =
+    (bookingData.Phone || "").replace(/\D/g, "");
 
 const whatsappPhone =
     customerPhone.startsWith("0")
