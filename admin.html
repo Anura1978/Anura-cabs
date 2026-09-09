@@ -427,7 +427,15 @@ async function loadBookings() {
                                 👨‍✈️ Assign Driver
                             </button>
 
-
+<button
+    onclick="
+        window.completeBooking(
+            '${bookingDoc.id}'
+        )
+    "
+>
+    ✅ Mark Completed
+</button>
                         </div>
 
 
