@@ -739,6 +739,30 @@ document
         }
     );
 
+        }
+    );
+
+
+document
+    .getElementById("notificationBtn")
+    .addEventListener("click", async () => {
+
+        if (!("Notification" in window)) {
+            alert("This browser does not support notifications.");
+            return;
+        }
+
+        const permission =
+            await Notification.requestPermission();
+
+        if (permission === "granted") {
+            alert("🔔 Notifications enabled!");
+        } else {
+            alert("Notifications were not enabled.");
+        }
+
+    });
+
 </script>
 <div id="dashboardSummary">
 
