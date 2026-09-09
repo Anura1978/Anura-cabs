@@ -342,83 +342,83 @@ async function assignDriver(bookingId) {
     }
 
 }
-window.assignDriver = assignDriver;
-function sendCustomerWhatsApp(bookingId) {
+async function sendCustomerWhatsApp(bookingId) {
 
-    const message =
-        "🚖 Anura Cabs - Booking Confirmation\n\n" +
-        "Booking ID: " + bookingId + "\n\n" +
-        "Your booking has been confirmed.\n\n" +
-        "Thank you for choosing Anura Cabs!";
+    try {
 
-    const url =
-        "https://wa.me/?text=" +
-        encodeURIComponent(message);
+        const bookingDoc =
+            await getDocs(collection(db, "bookings"));
 
-    window.open(url, "_blank");
-}
+        let bookingData = null;
 
-window.sendCustomerWhatsApp = sendCustomerWhatsApp;
-    document
-        .getElementById("loginBtn")
-        .addEventListener("click", async () => {
+        bookingDoc.forEach((item) => {
 
-
-            const email =
-                document
-                    .getElementById("email")
-                    .value
-                    .trim();
-
-
-            const password =
-                document
-                    .getElementById("password")
-                    .value;
-
-
-            const message =
-                document.getElementById("message");
-
-
-            if (!email || !password) {
-
-                message.textContent =
-                    "Please enter email and password.";
-
-                return;
-
-            }
-
-
-            try {
-
-                await signInWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
-
-
-                message.textContent =
-                    "Login successful!";
-
-
-                await loadBookings();
-
-
-            } catch (error) {
-
-                message.textContent =
-                    error.code +
-                    " - " +
-                    error.message;
-
+            if (item.id === bookingId) {
+                bookingData = item.data();
             }
 
         });
 
-</script>
+
+        if (!bookingData) {
+
+            alert("Booking not found.");
+
+            return;
+
+        }
+
+
+        const message =
+            "🚖 *ANURA CABS - BOOKING CONFIRMATION*\n\n" +
+
+            "Booking ID: " + bookingId + "\n" +
+            "Customer: " + (bookingData.customer || "") + "\n" +
+            "Phone: " + (bookingData.Phone || "") + "\n\n" +
+
+            "📍 Pickup: " + (bookingData.pickup || "") + "\n" +
+            "📍 Destination: " + (bookingData.destination || "") + "\n" +
+            "📏 Distance: " + (bookingData.distance || "") + " KM\n" +
+            "💰 Fare: LKR " + (bookingData.Fare || "") + "\n\n" +
+
+            "🚗 Vehicle: " + (bookingData.Vehicle || "") + "\n" +
+            "📅 Date: " + (bookingData.date || "") + "\n" +
+            "⏰ Time: " + (bookingData.Time || "") + "\n\n" +
+
+            "👨‍✈️ Driver: " + (bookingData.Driver || "Not assigned") + "\n" +
+            "📞 Driver Phone: " + (bookingData.DriverPhone || "") + "\n" +
+            "🚘 Vehicle Number: " + (bookingData.VehicleNumber || "") + "\n\n" +
+
+            "✅ Booking Status: " + (bookingData.Status || "") + "\n\n" +
+
+            "Thank you for choosing Anura Cabs! 🇱🇰";
+
+
+        const url =
+            "https://wa.me/?text=" +
+            encodeURIComponent(message);
+
+
+        window.open(url, "_blank");
+
+
+    } catch (error) {
+
+        console.error(
+            "WhatsApp error:",
+            error
+        );
+
+        alert(
+            "Failed to prepare WhatsApp message."
+        );
+
+    }
+
+}
+
+
+window.sendCustomerWhatsApp = sendCustomerWhatsApp;
 
 
 
