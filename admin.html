@@ -343,7 +343,22 @@ async function assignDriver(bookingId) {
 
 }
 window.assignDriver = assignDriver;
+function sendCustomerWhatsApp(bookingId) {
 
+    const message =
+        "🚖 Anura Cabs - Booking Confirmation\n\n" +
+        "Booking ID: " + bookingId + "\n\n" +
+        "Your booking has been confirmed.\n\n" +
+        "Thank you for choosing Anura Cabs!";
+
+    const url =
+        "https://wa.me/?text=" +
+        encodeURIComponent(message);
+
+    window.open(url, "_blank");
+}
+
+window.sendCustomerWhatsApp = sendCustomerWhatsApp;
     document
         .getElementById("loginBtn")
         .addEventListener("click", async () => {
