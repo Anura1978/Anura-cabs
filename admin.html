@@ -763,7 +763,21 @@ document
 </div> 
     <button id="notificationBtn">
     🔔 Enable Notifications
-</button>
+</button> 
+    <script>
+document.getElementById("notificationBtn").addEventListener("click", async function () {
+
+    if (!("Notification" in window)) {
+        alert("Notifications are not supported.");
+        return;
+    }
+
+    const permission = await Notification.requestPermission();
+
+    alert("Notification permission: " + permission);
+
+});
+</script>
 </body>
 
 </html>
