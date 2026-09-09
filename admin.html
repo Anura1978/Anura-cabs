@@ -741,35 +741,6 @@ document
 
     
 
-<script>
-document
-    .getElementById("notificationBtn")
-    .addEventListener("click", async () => {
-
-        const permission =
-            await Notification.requestPermission();
-
-        if (permission === "granted") {
-
-            new Notification(
-                "🚖 Anura Cabs",
-                {
-                    body: "🔔 Notifications are working!"
-                }
-            );
-
-        } else {
-
-            alert(
-                "Notifications permission: " +
-                permission
-            );
-
-        }
-
-    });
-
-</script>
 <div id="dashboardSummary">
 
     <h2>📊 Booking Summary</h2>
