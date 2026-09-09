@@ -339,7 +339,14 @@ let completedCount = 0;
 
             }
         );
+document.getElementById("pendingCount").textContent =
+    pendingCount;
 
+document.getElementById("assignedCount").textContent =
+    assignedCount;
+
+document.getElementById("completedCount").textContent =
+    completedCount;
     }
 
     catch (error) {
