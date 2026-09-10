@@ -366,7 +366,16 @@ let newPendingBooking = false;
 
         document.getElementById("completedCount").textContent =
             completedCount;
+const newBookingAlert =
+    document.getElementById("newBookingAlert");
 
+if (newPendingBooking) {
+    newBookingAlert.style.display = "block";
+    newBookingAlert.textContent =
+        "🔔 NEW PENDING BOOKING!";
+} else {
+    newBookingAlert.style.display = "none";
+}
     }
 
     catch (error) {
