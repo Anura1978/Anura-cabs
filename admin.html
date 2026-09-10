@@ -199,9 +199,10 @@ let newPendingBooking = false;
                     bookingDoc.data();
 
 
-                if (data.Status === "Pending") {
-                    pendingCount++;
-                }
+            if (data.Status === "Pending") {
+    pendingCount++;
+    newPendingBooking = true;
+}
 
                 if (data.Status === "Assigned") {
                     assignedCount++;
