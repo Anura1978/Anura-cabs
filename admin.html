@@ -186,16 +186,11 @@ async function loadBookings() {
             );
 
         bookingsDiv.innerHTML = "";
-const newBookingAlert =
-    document.getElementById("newBookingAlert");
 
-newBookingAlert.style.display = "block";
-newBookingAlert.textContent =
-    "🔔 NEW BOOKING!";
         let pendingCount = 0;
         let assignedCount = 0;
         let completedCount = 0;
-
+let newPendingBooking = false;
 
         querySnapshot.forEach(
             (bookingDoc) => {
