@@ -760,7 +760,40 @@ document
         }
     
     );
+function startBookingListener() {
 
+    onSnapshot(
+        collection(db, "bookings"),
+        (snapshot) => {
+
+            let hasNewPending = false;
+
+            snapshot.docChanges().forEach((change) => {
+
+                if (
+                    change.type === "added" &&
+                    change.doc.data().Status === "Pending"
+                ) {
+                    hasNewPending = true;
+                }
+
+            });
+
+            const alertBox =
+                document.getElementById("newBookingAlert");
+
+            if (hasNewPending) {
+
+                alertBox.style.display = "block";
+                alertBox.textContent =
+                    "🔔 NEW PENDING BOOKING!";
+
+            }
+
+        }
+    );
+
+}
 </script>
 
 <div id="dashboardSummary">
