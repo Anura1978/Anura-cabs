@@ -764,29 +764,56 @@ startBookingListener();
     );
 function startBookingListener() {
 
+    let firstSnapshot = true;
+
     onSnapshot(
         collection(db, "bookings"),
-        (snapshot) => {
+        async (snapshot) => {
 
             let hasNewPending = false;
 
-            snapshot.docChanges().forEach((change) => {
+            if (!firstSnapshot) {
 
-                if (
-                    change.type === "added" &&
-                    change.doc.data().Status === "Pending"
-                ) {
-                    hasNewPending = true;
-                }
+                snapshot.docChanges().forEach((change) => {
 
-            });
+                    if (
+                        change.type === "added" &&
+                        change.doc.data().Status === "Pending"
+                    ) {
+
+                        hasNewPending = true;
+
+                    }
+
+                });
+
+            }
+
+            firstSnapshot = false;
+
+
+            /* =========================
+               REFRESH DASHBOARD
+            ========================= */
+
+            await loadBookings();
+
+
+            /* =========================
+               NEW BOOKING ALERT
+            ========================= */
 
             const alertBox =
-                document.getElementById("newBookingAlert");
+                document.getElementById(
+                    "newBookingAlert"
+                );
+
 
             if (hasNewPending) {
 
-                alertBox.style.display = "block";
+                alertBox.style.display =
+                    "block";
+
                 alertBox.textContent =
                     "🔔 NEW PENDING BOOKING!";
 
