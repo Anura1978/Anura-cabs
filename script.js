@@ -615,11 +615,14 @@ function showConfirmationCard() {
 }
 
 
+
+
 /* =========================
    SEND BOOKING TO ANURA CABS
+   SAVE TO FIRESTORE + WHATSAPP
 ========================= */
 
-function sendBookingWhatsApp() {
+async function sendBookingWhatsApp() {
 
     const bookingId =
         document.getElementById(
@@ -661,16 +664,118 @@ function sendBookingWhatsApp() {
             "confirmDestination"
         ).textContent;
 
-    const distance =
+    const distanceText =
         document.getElementById(
             "confirmDistance"
         ).textContent;
 
-    const fare =
+    const fareText =
         document.getElementById(
             "confirmFare"
         ).textContent;
 
+
+    const distance =
+        parseFloat(
+            distanceText.replace(
+                " KM",
+                ""
+            )
+        );
+
+    const fare =
+        Number(
+            fareText.replace(
+                /,/g,
+                ""
+            )
+        );
+
+
+    /* =========================
+       SAVE BOOKING TO FIRESTORE
+    ========================= */
+
+    try {
+
+        if (!window.anuraCabsDB) {
+
+            throw new Error(
+                "Firebase connection not available."
+            );
+        }
+
+
+        const { collection, doc, setDoc } =
+            await import(
+                "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js"
+            );
+
+
+        await setDoc(
+            doc(
+                window.anuraCabsDB,
+                "bookings",
+                bookingId
+            ),
+            {
+
+                customer: name,
+
+                Phone: phone,
+
+                Vehicle: vehicle,
+
+                date: date,
+
+                Time: time,
+
+                pickup: pickup,
+
+                destination: destination,
+
+                distance: distance,
+
+                Fare: fare,
+
+                Status: "Pending",
+
+                Driver: "",
+
+                DriverPhone: "",
+
+                VehicleNumber: ""
+
+            }
+        );
+
+
+        console.log(
+            "Booking saved to Firestore:",
+            bookingId
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Firestore booking error:",
+            error
+        );
+
+
+        alert(
+            "Booking could not be registered.\n\n" +
+            "Please try again."
+        );
+
+        return;
+    }
+
+
+    /* =========================
+       WHATSAPP MESSAGE
+    ========================= */
 
     const message =
 
@@ -700,10 +805,10 @@ ${pickup}
 ${destination}
 
 📏 Distance:
-${distance}
+${distanceText}
 
 💰 Estimated Fare:
-LKR ${fare}
+LKR ${fareText}
 
 ⚠️ Please review this booking and assign a driver.
 
