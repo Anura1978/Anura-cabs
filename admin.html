@@ -156,7 +156,15 @@ const firebaseConfig = {
 
 const app =
     initializeApp(firebaseConfig);
+/* =========================
+   NEW BOOKING ALERT SOUND
+========================= */
 
+let alertSound = new Audio(
+    "https://actions.google.com/sounds/v1/alarms/beep_short.ogg"
+);
+
+alertSound.volume = 1.0;
 const auth =
     getAuth(app);
 
