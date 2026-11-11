@@ -638,7 +638,8 @@ async function sendBookingWhatsApp() {
         document.getElementById(
             "confirmPhone"
         ).textContent;
-
+const email =
+    document.getElementById("email").value.trim();
     const vehicle =
         document.getElementById(
             "confirmVehicle"
