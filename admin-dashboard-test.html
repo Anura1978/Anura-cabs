@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anura Cabs - Admin Dashboard</title>
+<style>
+:root{--navy:#10243a;--gold:#f5b82e;--bg:#f3f6fa;--muted:#64748b;--line:#e2e8f0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Arial,sans-serif;color:#172033}
+header{background:var(--navy);color:white;padding:20px 16px;text-align:center}
+header h1{margin:0;font-size:24px} header p{margin:7px 0 0;color:#dbe5ef}
+main{max-width:1100px;margin:24px auto;padding:0 14px}
+.panel{background:white;border-radius:14px;padding:18px;margin-bottom:18px;box-shadow:0 3px 14px #10243a12}
+.login-box{max-width:430px;margin:45px auto}
+input{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;margin:7px 0;font-size:15px}
+button,.filter-btn{border:0;border-radius:8px;padding:11px 14px;background:var(--navy);color:white;font-weight:700;cursor:pointer}
+button:hover,.filter-btn:hover{opacity:.9}
+button.secondary,.filter-btn{background:#e8eef5;color:#172033}
+button.whatsapp{background:#128c4a}button.complete{background:#16734a}
+#message{margin-top:12px;text-align:center;color:#b42318}
+#dashboard{display:none}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat{padding:15px;border-radius:12px;background:#f8fafc;border:1px solid var(--line);font-weight:700}
+.stat strong{display:block;font-size:28px;margin-top:6px}
+.stat.pending{border-left:5px solid #e5a000}.stat.assigned{border-left:5px solid #2775ca}.stat.completed{border-left:5px solid #16945b}
+#newBookingAlert{display:none;background:#fff0bd;border:1px solid #f3c64e;color:#694600;padding:14px;border-radius:10px;font-weight:700;text-align:center;margin-bottom:16px}
+.toolbar{display:grid;grid-template-columns:minmax(180px,1fr) auto;gap:12px;align-items:center}
+.filters{display:flex;gap:7px;flex-wrap:wrap}
+.filter-btn.active{background:var(--navy);color:white}
+.booking-list{display:grid;gap:14px}
+.booking{border:1px solid var(--line);border-radius:12px;padding:16px;background:white}
+.booking.is-new{border:2px solid var(--gold);box-shadow:0 0 0 3px #f5b82e22}
+.booking-top{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.booking h3{margin:0;font-size:17px;overflow-wrap:anywhere}
+.status{font-size:12px;font-weight:800;border-radius:20px;padding:6px 10px}
+.status.pending{background:#fff1c2;color:#795500}.status.assigned{background:#dcecff;color:#174e8a}.status.completed{background:#d9f6e7;color:#12613d}
+.new-tag{font-size:11px;background:#ffe08a;color:#664500;padding:5px 8px;border-radius:20px;font-weight:800}
+.details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 16px;margin:15px 0}
+.details p{margin:0;overflow-wrap:anywhere}.details b{color:#475569}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.actions button{width:auto;margin:0}
+.driver-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0}
+.driver-fields input{margin:0}
+.empty{padding:25px;text-align:center;color:var(--muted)}
+.small{font-size:13px;color:var(--muted)}
+@media(max-width:650px){main{margin:14px auto}.summary{grid-template-columns:1fr}.toolbar{grid-template-columns:1fr}.details{grid-template-columns:1fr}.driver-fields{grid-template-columns:1fr}.actions button{flex:1 1 100%}}
+</style>
+</head>
+<body>
+<header><h1>🚖 Anura Cabs Admin</h1><p>Booking management dashboard</p></header>
+<main>
+<section class="panel login-box" id="loginPanel">
+<h2>Admin Login</h2>
+<input type="email" id="email" placeholder="Admin Email" autocomplete="username">
+<input type="password" id="password" placeholder="Password" autocomplete="current-password">
+<button id="loginBtn" style="width:100%">Login</button>
+<div id="message" role="status"></div>
+</section>
+
+<section id="dashboard">
+<div id="newBookingAlert" role="alert">🔔 NEW PENDING BOOKING!</div>
+<div class="panel">
+<div class="booking-top"><h2>📊 Booking Summary</h2><button class="secondary" id="enableNotificationsBtn">Enable browser alerts</button></div>
+<div class="summary">
+<div class="stat pending">🟡 Pending<strong id="pendingCount">0</strong></div>
+<div class="stat assigned">🔵 Assigned<strong id="assignedCount">0</strong></div>
+<div class="stat completed">🟢 Completed<strong id="completedCount">0</strong></div>
+</div>
+<p class="small" id="connectionStatus">Connecting to bookings…</p>
+</div>
+<div class="panel">
+<div class="toolbar">
+<input id="bookingSearch" type="search" placeholder="Search Booking ID, customer, phone, pickup or destination">
+<div class="filters" aria-label="Booking status filters">
+<button class="filter-btn active" data-filter="All">All</button>
+<button class="filter-btn" data-filter="Pending">Pending</button>
+<button class="filter-btn" data-filter="Assigned">Assigned</button>
+<button class="filter-btn" data-filter="Completed">Completed</button>
+</div>
+</div>
+</div>
+<div id="bookings" class="booking-list"></div>
+</section>
+</main>
+<audio id="alertSound" preload="auto" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+import { getFirestore, collection, getDocs, onSnapshot, updateDoc, doc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyCjjzQn62zxY8ZvfCzFkIRHm8ioNHgo34E",
+
+    authDomain:
+        "anura-cabs.firebaseapp.com",
+
+    projectId:
+        "anura-cabs",
+
+    storageBucket:
+        "anura-cabs.firebasestorage.app",
+
+    messagingSenderId:
+        "636799292252",
+
+    appId:
+        "1:636799292252:web:0d57e77751c1a3179c6799"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const bookingsCollection = collection(db, "bookings");
+let allBookings = [];
+let activeFilter = "All";
+let firstSnapshot = true;
+let knownBookingIds = new Set();
+let listenerStarted = false;
+const $ = id => document.getElementById(id);
+
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  })[ch]);
+}
+function normalizedStatus(value) {
+  const s = String(value || "Pending").toLowerCase();
+  if (s === "assigned") return "Assigned";
+  if (s === "completed") return "Completed";
+  return "Pending";
+}
+function statusClass(status) { return status.toLowerCase(); }
+function bookingSearchText(b) {
+  return [b.id,b.customer,b.Phone,b.pickup,b.destination,b.Vehicle].join(" ").toLowerCase();
+}
+function sortBookings(a,b) {
+  // Booking date/time is the most useful available ordering field in the current schema.
+  const ad = `${a.date || ""} ${a.Time || ""}`;
+  const bd = `${b.date || ""} ${b.Time || ""}`;
+  if (ad !== bd) return bd.localeCompare(ad);
+  return String(b.id).localeCompare(String(a.id));
+}
+function updateSummary() {
+  $("pendingCount").textContent = allBookings.filter(b => normalizedStatus(b.Status)==="Pending").length;
+  $("assignedCount").textContent = allBookings.filter(b => normalizedStatus(b.Status)==="Assigned").length;
+  $("completedCount").textContent = allBookings.filter(b => normalizedStatus(b.Status)==="Completed").length;
+}
+function renderBookings() {
+  const term = $("bookingSearch").value.trim().toLowerCase();
+  const visible = allBookings.filter(b =>
+    (activeFilter === "All" || normalizedStatus(b.Status) === activeFilter) &&
+    (!term || bookingSearchText(b).includes(term))
+  ).sort(sortBookings);
+  const host = $("bookings");
+  if (!visible.length) {
+    host.innerHTML = '<div class="panel empty">No bookings match this filter or search.</div>';
+    return;
+  }
+  host.innerHTML = visible.map(b => {
+    const status = normalizedStatus(b.Status);
+    const isNew = b._isNew && status === "Pending";
+    return `
+      <article class="booking ${isNew ? "is-new" : ""}">
+        <div class="booking-top">
+          <h3>🚖 ${escapeHtml(b.id)}</h3>
+          <div>${isNew ? '<span class="new-tag">NEW BOOKING</span> ' : ''}
+            <span class="status ${statusClass(status)}">${status.toUpperCase()}</span></div>
+        </div>
+        <div class="details">
+          <p><b>Customer:</b> ${escapeHtml(b.customer)}</p>
+          <p><b>Phone:</b> ${escapeHtml(b.Phone)}</p>
+          <p><b>Email:</b> ${escapeHtml(b.Email || "—")}</p>
+          <p><b>Vehicle:</b> ${escapeHtml(b.Vehicle)}</p>
+          <p><b>Date / Time:</b> ${escapeHtml(b.date)} ${escapeHtml(b.Time)}</p>
+          <p><b>Pickup:</b> ${escapeHtml(b.pickup)}</p>
+          <p><b>Destination:</b> ${escapeHtml(b.destination)}</p>
+          <p><b>Distance:</b> ${escapeHtml(b.distance)} KM</p>
+          <p><b>Fare:</b> LKR ${escapeHtml(b.Fare)}</p>
+          <p><b>Driver:</b> ${escapeHtml(b.Driver || "Not assigned")}</p>
+          <p><b>Driver Phone:</b> ${escapeHtml(b.DriverPhone || "—")}</p>
+          <p><b>Vehicle Number:</b> ${escapeHtml(b.VehicleNumber || "—")}</p>
+        </div>
+        <div class="actions">
+          <button class="whatsapp" data-action="customer" data-id="${escapeHtml(b.id)}">📲 WhatsApp Customer</button>
+          <button data-action="driver" data-id="${escapeHtml(b.id)}">👨‍✈️ WhatsApp Driver</button>
+          ${status !== "Completed" ? `<button class="complete" data-action="complete" data-id="${escapeHtml(b.id)}">✅ Mark Completed</button>` : ""}
+        </div>
+        ${status !== "Completed" ? `
+        <div class="driver-fields">
+          <input type="text" id="driverName-${escapeHtml(b.id)}" placeholder="Driver Name" value="${escapeHtml(b.Driver || "")}">
+          <input type="tel" id="driverPhone-${escapeHtml(b.id)}" placeholder="Driver Phone" value="${escapeHtml(b.DriverPhone || "")}">
+          <input type="text" id="vehicleNumber-${escapeHtml(b.id)}" placeholder="Vehicle Number" value="${escapeHtml(b.VehicleNumber || "")}">
+        </div>
+        <div class="actions"><button data-action="assign" data-id="${escapeHtml(b.id)}">💾 Assign / Update Driver</button></div>` : ""}
+      </article>`;
+  }).join("");
+}
+async function loadBookings() {
+  const snap = await getDocs(bookingsCollection);
+  allBookings = snap.docs.map(d => ({id:d.id, ...d.data()}));
+  updateSummary();
+  renderBookings();
+}
+async function assignDriver(bookingId) {
+  const name = $(`driverName-${bookingId}`)?.value.trim();
+  const phoneRaw = $(`driverPhone-${bookingId}`)?.value.trim();
+  const vehicle = $(`vehicleNumber-${bookingId}`)?.value.trim();
+  if (!name || !phoneRaw || !vehicle) {
+    alert("Please enter Driver Name, Driver Phone and Vehicle Number.");
+    return;
+  }
+  const phone = phoneRaw.replace(/\D/g,"");
+  try {
+    await updateDoc(doc(db,"bookings",bookingId), {
+      Driver:name, DriverPhone:phoneRaw, VehicleNumber:vehicle, Status:"Assigned"
+    });
+    alert("Driver assigned successfully.");
+  } catch(e) {
+    console.error(e); alert("Driver assignment failed: " + (e.message || e));
+  }
+}
+async function completeBooking(bookingId) {
+  if (!confirm("Mark this booking as completed?")) return;
+  try { await updateDoc(doc(db,"bookings",bookingId), {Status:"Completed"}); }
+  catch(e) { console.error(e); alert("Could not update booking: " + (e.message || e)); }
+}
+function toWhatsAppPhone(raw) {
+  let p = String(raw || "").replace(/\D/g,"");
+  if (p.startsWith("00")) p = p.slice(2);
+  if (p.startsWith("0")) p = "94" + p.slice(1);
+  return p;
+}
+function openWhatsApp(phone, message) {
+  const p = toWhatsAppPhone(phone);
+  if (!p) { alert("A valid phone number is not available."); return; }
+  window.open("https://wa.me/" + p + "?text=" + encodeURIComponent(message), "_blank", "noopener");
+}
+function sendCustomerWhatsApp(bookingId) {
+  const b = allBookings.find(x => x.id === bookingId);
+  if (!b) return alert("Booking not found.");
+  const message = `🚖 *ANURA CABS - BOOKING UPDATE*\n\nBooking ID: ${b.id}\nCustomer: ${b.customer || ""}\nPickup: ${b.pickup || ""}\nDestination: ${b.destination || ""}\nDate: ${b.date || ""}\nTime: ${b.Time || ""}\nVehicle: ${b.Vehicle || ""}\n\n👨‍✈️ Driver: ${b.Driver || "Not assigned"}\n📞 Driver Phone: ${b.DriverPhone || "Not assigned"}\n🚘 Vehicle Number: ${b.VehicleNumber || "Not assigned"}\n\nBooking Status: ${normalizedStatus(b.Status)}\nThank you for choosing Anura Cabs! 🇱🇰`;
+  openWhatsApp(b.Phone,message);
+}
+function sendDriverWhatsApp(bookingId) {
+  const b = allBookings.find(x => x.id === bookingId);
+  if (!b) return alert("Booking not found.");
+  if (!b.DriverPhone) return alert("Assign a driver and enter the driver's phone number first.");
+  const message = `🚖 *ANURA CABS - NEW TRIP ASSIGNMENT*\n\nBooking ID: ${b.id}\nCustomer: ${b.customer || ""}\nCustomer Phone: ${b.Phone || ""}\nPickup: ${b.pickup || ""}\nDestination: ${b.destination || ""}\nDate: ${b.date || ""}\nTime: ${b.Time || ""}\nVehicle: ${b.Vehicle || ""}\nDistance: ${b.distance || ""} KM\nFare: LKR ${b.Fare || ""}\nVehicle Number: ${b.VehicleNumber || ""}\n\nPlease confirm receipt.`;
+  openWhatsApp(b.DriverPhone,message);
+}
+$("loginBtn").addEventListener("click", async () => {
+  const email = $("email").value.trim(), password = $("password").value;
+  if (!email || !password) { $("message").textContent = "Please enter email and password."; return; }
+  $("loginBtn").disabled = true; $("message").textContent = "Signing in…";
+  try {
+    await signInWithEmailAndPassword(auth,email,password);
+  } catch(e) {
+    $("message").textContent = `${e.code || "Login error"}: ${e.message || e}`;
+    $("loginBtn").disabled = false;
+  }
+});
+onAuthStateChanged(auth, user => {
+  if (!user) return;
+  $("loginPanel").style.display = "none";
+  $("dashboard").style.display = "block";
+  $("message").textContent = "";
+  if (!listenerStarted) startBookingListener();
+});
+function startBookingListener() {
+  listenerStarted = true;
+  onSnapshot(bookingsCollection, snapshot => {
+    let newPending = false;
+    if (firstSnapshot) {
+      snapshot.docs.forEach(d => knownBookingIds.add(d.id));
+      firstSnapshot = false;
+    } else {
+      snapshot.docChanges().forEach(change => {
+        if (change.type === "added" && normalizedStatus(change.doc.data().Status)==="Pending" && !knownBookingIds.has(change.doc.id)) {
+          newPending = true;
+          knownBookingIds.add(change.doc.id);
+          const item = allBookings.find(b => b.id === change.doc.id);
+          if (item) item._isNew = true;
+        }
+      });
+    }
+    allBookings = snapshot.docs.map(d => {
+      const previous = allBookings.find(b => b.id === d.id);
+      return {id:d.id, ...d.data(), _isNew: previous?._isNew || false};
+    });
+    if (newPending) {
+      const alertBox = $("newBookingAlert");
+      alertBox.style.display = "block";
+      alertBox.textContent = "🔔 NEW PENDING BOOKING RECEIVED!";
+      const audio = $("alertSound");
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+      if ("Notification" in window && Notification.permission === "granted") {
+        new Notification("Anura Cabs - New Booking", {body:"A new pending booking has arrived."});
+      }
+    }
+    $("connectionStatus").textContent = "🟢 Live booking updates connected";
+    updateSummary(); renderBookings();
+  }, error => {
+    console.error("Booking listener error:",error);
+    $("connectionStatus").textContent = "🔴 Could not load bookings: " + (error.message || error);
+  });
+}
+$("bookingSearch").addEventListener("input",renderBookings);
+document.querySelectorAll("[data-filter]").forEach(btn => btn.addEventListener("click",() => {
+  activeFilter = btn.dataset.filter;
+  document.querySelectorAll("[data-filter]").forEach(x => x.classList.toggle("active",x===btn));
+  renderBookings();
+}));
+$("bookings").addEventListener("click", event => {
+  const btn = event.target.closest("button[data-action]");
+  if (!btn) return;
+  const id = btn.dataset.id;
+  if (btn.dataset.action==="assign") assignDriver(id);
+  if (btn.dataset.action==="complete") completeBooking(id);
+  if (btn.dataset.action==="customer") sendCustomerWhatsApp(id);
+  if (btn.dataset.action==="driver") sendDriverWhatsApp(id);
+});
+$("enableNotificationsBtn").addEventListener("click",async () => {
+  if (!("Notification" in window)) return alert("Browser notifications are not supported.");
+  const permission = await Notification.requestPermission();
+  alert("Browser notification permission: " + permission + ". Keep this dashboard open to receive alerts.");
+  // A short user-initiated sound test also unlocks audio in browsers that require a gesture.
+  $("alertSound").play().then(()=>$("alertSound").pause()).catch(()=>{});
+});
+</script>
+</body>
+</html>
