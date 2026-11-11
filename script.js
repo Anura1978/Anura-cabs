@@ -724,7 +724,7 @@ const email =
                 customer: name,
 
                 Phone: phone,
-
+Email: email,
                 Vehicle: vehicle,
 
                 date: date,
